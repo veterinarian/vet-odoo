@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Main Menu -->
+    <menuitem id="menu_vet_clinic_root"
+              name="Veterinary"
+              sequence="10"
+              web_icon="vet_clinic,static/description/icon.png"/>
+
+    <!-- Appointments Menu -->
+    <menuitem id="menu_vet_appointments"
+              name="Appointments"
+              parent="menu_vet_clinic_root"
+              sequence="10"
+              action="action_vet_appointment"/>
+
+    <!-- Patients Menu -->
+    <menuitem id="menu_vet_patients"
+              name="Patients"
+              parent="menu_vet_clinic_root"
+              sequence="20"
+              action="action_vet_patient"/>
+
+    <!-- Owners Menu -->
+    <menuitem id="menu_vet_owners"
+              name="Owners"
+              parent="menu_vet_clinic_root"
+              sequence="30"
+              action="action_vet_owner"/>
+
+    <!-- Configuration Menu -->
+    <menuitem id="menu_vet_config"
+              name="Configuration"
+              parent="menu_vet_clinic_root"
+              sequence="100"
+              groups="group_vet_clinic_manager"/>
+
+    <!-- Species Configuration -->
+    <record id="action_vet_species" model="ir.actions.act_window">
+        <field name="name">Species</field>
+        <field name="res_model">vet.species</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_vet_species"
+              name="Species"
+              parent="menu_vet_config"
+              sequence="10"
+              action="action_vet_species"/>
+</odoo>

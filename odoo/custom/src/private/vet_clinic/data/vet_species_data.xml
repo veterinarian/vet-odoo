@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Common Pet Species -->
+        <record id="species_dog" model="vet.species">
+            <field name="name">Dog</field>
+            <field name="code">DOG</field>
+            <field name="description">Domestic dog (Canis familiaris)</field>
+        </record>
+
+        <record id="species_cat" model="vet.species">
+            <field name="name">Cat</field>
+            <field name="code">CAT</field>
+            <field name="description">Domestic cat (Felis catus)</field>
+        </record>
+
+        <record id="species_bird" model="vet.species">
+            <field name="name">Bird</field>
+            <field name="code">BIRD</field>
+            <field name="description">Various bird species</field>
+        </record>
+
+        <record id="species_rabbit" model="vet.species">
+            <field name="name">Rabbit</field>
+            <field name="code">RABBIT</field>
+            <field name="description">Domestic rabbit</field>
+        </record>
+
+        <record id="species_hamster" model="vet.species">
+            <field name="name">Hamster</field>
+            <field name="code">HAMSTR</field>
+            <field name="description">Hamster</field>
+        </record>
+
+        <record id="species_guinea_pig" model="vet.species">
+            <field name="name">Guinea Pig</field>
+            <field name="code">GPIG</field>
+            <field name="description">Guinea pig</field>
+        </record>
+
+        <record id="species_reptile" model="vet.species">
+            <field name="name">Reptile</field>
+            <field name="code">REPT</field>
+            <field name="description">Various reptile species</field>
+        </record>
+
+        <record id="species_fish" model="vet.species">
+            <field name="name">Fish</field>
+            <field name="code">FISH</field>
+            <field name="description">Various fish species</field>
+        </record>
+
+        <record id="species_ferret" model="vet.species">
+            <field name="name">Ferret</field>
+            <field name="code">FERRET</field>
+            <field name="description">Domestic ferret</field>
+        </record>
+
+        <record id="species_horse" model="vet.species">
+            <field name="name">Horse</field>
+            <field name="code">HORSE</field>
+            <field name="description">Horse (Equus caballus)</field>
+        </record>
+    </data>
+
+    <data>
+        <!-- Sequence for Appointments -->
+        <record id="seq_vet_appointment" model="ir.sequence">
+            <field name="name">Vet Appointment</field>
+            <field name="code">vet.appointment</field>
+            <field name="prefix">VET-APP-</field>
+            <field name="padding">5</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+    </data>
+</odoo>
