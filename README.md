@@ -4,14 +4,77 @@
 [![AGPL-3.0-or-later license](https://img.shields.io/badge/license-AGPL--3.0--or--later-success})](LICENSE)
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://pre-commit.com/)
 
-# Vet Odoo - a Doodba deployment
+# Vet Odoo - Veterinary Clinic Management System
 
-This project is a Doodba scaffolding. Check upstream docs on the matter:
+A professional Odoo 17 deployment for veterinary clinic management, built with Doodba.
 
-- [General Doodba docs](https://github.com/Tecnativa/doodba).
+## Features
+
+- **Patient Management** - Comprehensive animal patient records with medical history
+- **Owner Management** - Pet owner contact information and relationships
+- **Appointment System** - Calendar-based scheduling with workflow management
+- **Medical Records** - Diagnosis, treatment plans, and prescriptions
+- **Security** - Role-based access control (User and Manager roles)
+
+## Quick Start
+
+### Prerequisites
+
+- Docker and Docker Compose
+- Git
+
+### Installation
+
+```bash
+# Clone the repository
+git clone <repository-url>
+cd vet-odoo
+
+# Start development environment
+docker-compose -f devel.yaml up
+
+# Access Odoo at http://localhost:8069
+# Create database and install "Veterinary Clinic" module
+```
+
+## Project Structure
+
+```
+vet-odoo/
+├── odoo/custom/src/private/vet_clinic/    # Veterinary clinic module
+├── requirements.txt                        # Python dependencies (reference)
+├── requirements-dev.txt                    # Development dependencies
+├── DEVELOPMENT.md                          # Development guide
+├── devel.yaml                              # Development environment
+├── test.yaml                               # Testing environment
+└── prod.yaml                               # Production environment
+```
+
+## Documentation
+
+- **[Development Guide](DEVELOPMENT.md)** - Setup instructions, workflows, and best practices
+- **[Module README](odoo/custom/src/private/vet_clinic/README.md)** - Veterinary clinic module documentation
+
+## Doodba Resources
+
+This project is a Doodba scaffolding. Check upstream docs:
+
+- [General Doodba docs](https://github.com/Tecnativa/doodba)
 - [Doodba copier template docs](https://github.com/Tecnativa/doodba-copier-template)
 - [Doodba QA docs](https://github.com/Tecnativa/doodba-qa)
 
-# Credits
+## Requirements Files
+
+- `odoo/custom/dependencies/pip.txt` - Docker/Doodba dependencies (primary)
+- `requirements.txt` - Complete dependency reference for local setup
+- `requirements-dev.txt` - Development tools (testing, linting, debugging)
+
+See [DEVELOPMENT.md](DEVELOPMENT.md) for detailed setup instructions.
+
+## License
+
+AGPL-3.0-or-later
+
+## Credits
 
 This project is maintained by: veterinarian

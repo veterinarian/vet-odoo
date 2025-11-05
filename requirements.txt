@@ -1,0 +1,86 @@
+# Odoo 17.0 Requirements
+# This file is for reference and local development outside Docker
+# For Docker/Doodba, dependencies are managed in odoo/custom/dependencies/pip.txt
+
+# Odoo Core (if installing from PyPI - not recommended, use git clone instead)
+# Note: Odoo is typically not installed via pip in production
+# Install from: https://github.com/odoo/odoo or https://github.com/OCA/OCB
+
+# Core Python Dependencies for Odoo 17
+Babel==2.9.1
+chardet==4.0.0
+cryptography==41.0.3
+decorator==4.4.2
+docutils==0.17
+ebaysdk==2.1.5
+freezegun==1.1.0
+gevent==22.10.2
+greenlet==2.0.2
+idna==2.10
+Jinja2==3.1.2
+libsass==0.20.1
+lxml==4.9.2
+MarkupSafe==2.1.2
+num2words==0.5.10
+ofxparse==0.21
+passlib==1.7.4
+Pillow==10.0.0
+polib==1.1.1
+psutil==5.9.5
+psycopg2==2.9.9
+pydot==1.4.2
+pyOpenSSL==23.2.0
+PyPDF2==3.0.1
+pyserial==3.5
+python-dateutil==2.8.2
+python-ldap==3.4.3
+python-stdnum==1.18
+pytz==2023.3
+pyusb==1.2.1
+qrcode==7.4.2
+reportlab==4.0.4
+requests==2.31.0
+rjsmin==1.2.1
+urllib3==2.0.4
+vobject==0.9.6.1
+Werkzeug==2.3.6
+xlrd==2.0.1
+XlsxWriter==3.1.2
+xlwt==1.3.0
+zeep==4.2.1
+
+# Additional Development Dependencies
+# Testing
+pytest>=7.4.0
+pytest-cov>=4.1.0
+pytest-odoo>=0.6.0
+coverage>=7.3.0
+
+# Code Quality
+pylint>=3.0.0
+pylint-odoo>=9.0.0
+ruff>=0.1.0
+black>=23.0.0
+isort>=5.12.0
+flake8>=6.1.0
+pre-commit>=3.3.0
+
+# Development Tools
+ipython>=8.12.0
+ipdb>=0.13.13
+watchdog>=3.0.0
+
+# Documentation
+sphinx>=7.0.0
+sphinx-rtd-theme>=1.3.0
+
+# Utilities
+python-barcode>=0.15.0
+phonenumbers>=8.13.0
+validate-email>=1.3
+
+# Database
+psycopg2-binary>=2.9.9
+
+# Odoo Community Addons
+git+https://github.com/OCA/openupgradelib.git@master
