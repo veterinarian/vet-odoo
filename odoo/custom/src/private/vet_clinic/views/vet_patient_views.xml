@@ -40,9 +40,19 @@
                             <field name="gender"/>
                         </group>
                         <group>
-                            <field name="birth_date"/>
-                            <field name="age"/>
-                            <field name="weight"/>
+                            <label for="age_years" string="Age"/>
+                            <div class="o_row">
+                                <field name="age_years" class="oe_inline"/>
+                                <span>years</span>
+                                <field name="age_months" class="oe_inline"/>
+                                <span>months</span>
+                            </div>
+                            <field name="birth_date" readonly="1" string="Calculated Birth Date"/>
+                            <label for="weight_display" string="Weight"/>
+                            <div class="o_row">
+                                <field name="weight_display" class="oe_inline"/>
+                                <field name="weight_unit" class="oe_inline" widget="radio" options="{'horizontal': true}"/>
+                            </div>
                             <field name="neutered"/>
                         </group>
                     </group>
