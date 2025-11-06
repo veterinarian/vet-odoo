@@ -41,29 +41,34 @@
                         </group>
                         <group>
                             <field name="age_entry_mode" invisible="1"/>
-                            <label for="birth_date"/>
-                            <div class="o_row">
-                                <field name="birth_date" class="oe_inline" readonly="age_entry_mode == True"/>
-                                <button name="action_toggle_age_entry_mode" type="object" string="Enter Age Instead" class="btn-link" invisible="age_entry_mode == True"/>
-                                <button name="action_toggle_age_entry_mode" type="object" string="Enter Birth Date Instead" class="btn-link" invisible="age_entry_mode == False"/>
-                            </div>
-                            <div invisible="age_entry_mode == False">
-                                <label for="age_years" string="Age (Years/Months)"/>
-                                <div class="o_row">
-                                    <field name="age_years" class="oe_inline" placeholder="0"/>
-                                    <span>years</span>
-                                    <field name="age_months" class="oe_inline" placeholder="0"/>
-                                    <span>months</span>
-                                </div>
-                            </div>
-                            <div invisible="age_entry_mode == True">
-                                <label for="age" string="Age"/>
-                                <field name="age" readonly="1"/>
-                            </div>
                             <field name="birth_date_approximate" invisible="1"/>
-                            <div class="alert alert-warning" invisible="birth_date_approximate == False" style="padding: 5px; margin: 5px 0;">
-                                Birth date is approximate (calculated from age)
+
+                            <!-- Birth Date Entry Mode (default) -->
+                            <label for="birth_date" invisible="age_entry_mode == True"/>
+                            <div class="o_row" invisible="age_entry_mode == True">
+                                <field name="birth_date" class="oe_inline"/>
+                                <button name="action_toggle_age_entry_mode" type="object" string="↔ Age" class="btn-link" title="Enter age instead"/>
                             </div>
+
+                            <label for="age" string="Age" invisible="age_entry_mode == True"/>
+                            <field name="age" readonly="1" invisible="age_entry_mode == True"/>
+
+                            <!-- Age Entry Mode -->
+                            <label for="birth_date" string="Birth Date (calculated)" invisible="age_entry_mode == False"/>
+                            <div class="o_row" invisible="age_entry_mode == False">
+                                <field name="birth_date" class="oe_inline" readonly="1"/>
+                                <button name="action_toggle_age_entry_mode" type="object" string="↔ Date" class="btn-link" title="Enter birth date instead"/>
+                                <span class="badge badge-warning ml-2" invisible="birth_date_approximate == False">Approximate</span>
+                            </div>
+
+                            <label for="age_years" string="Age" invisible="age_entry_mode == False"/>
+                            <div class="o_row" invisible="age_entry_mode == False">
+                                <field name="age_years" class="oe_inline" placeholder="0"/>
+                                <span>years</span>
+                                <field name="age_months" class="oe_inline" placeholder="0"/>
+                                <span>months</span>
+                            </div>
+
                             <label for="weight_display" string="Weight"/>
                             <div class="o_row">
                                 <field name="weight_display" class="oe_inline"/>
