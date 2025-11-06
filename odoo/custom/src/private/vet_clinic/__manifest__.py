@@ -26,11 +26,11 @@
     'data': [
         'security/vet_clinic_security.xml',
         'security/ir.model.access.csv',
-        'views/vet_patient_views.xml',
+        'data/vet_species_data.xml',
         'views/vet_owner_views.xml',
         'views/vet_appointment_views.xml',
+        'views/vet_patient_views.xml',
         'views/vet_menu.xml',
-        'data/vet_species_data.xml',
     ],
     'demo': [],
     'installable': True,
