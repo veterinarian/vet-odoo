@@ -29,13 +29,13 @@ class VetPatient(models.Model):
     microchip_number = fields.Char(string='Microchip Number')
 
     # Weight stored internally in kg
-    weight = fields.Float(string='Weight (internal kg)', tracking=True, groups='base.group_no_one')
+    weight = fields.Float(string='Weight (kg)', tracking=True)
     weight_unit = fields.Selection([
         ('kg', 'Kilograms (kg)'),
         ('lbs', 'Pounds (lbs)'),
     ], string='Weight Unit', default='kg', required=True, tracking=True)
     weight_display = fields.Float(string='Weight', compute='_compute_weight_display', inverse='_inverse_weight_display',
-                                   digits=(6, 2), tracking=True, store=True)
+                                   digits=(6, 2), store=False)
 
     neutered = fields.Boolean(string='Spayed/Neutered', default=False, tracking=True)
 
