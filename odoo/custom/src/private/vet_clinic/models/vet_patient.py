@@ -23,9 +23,9 @@ class VetPatient(models.Model):
                                              help='Indicates if birth date was calculated from age rather than provided exactly')
     age = fields.Char(string='Age', compute='_compute_age', store=False)
 
-    # Age input fields (inverse computation)
-    age_years = fields.Integer(string='Age (Years)', compute='_compute_age_fields', inverse='_inverse_age_fields', store=False)
-    age_months = fields.Integer(string='Age (Months)', compute='_compute_age_fields', inverse='_inverse_age_fields', store=False)
+    # Age input fields (stored, updated via onchange)
+    age_years = fields.Integer(string='Age (Years)', default=0)
+    age_months = fields.Integer(string='Age (Months)', default=0)
 
     color = fields.Char(string='Color/Markings')
     microchip_number = fields.Char(string='Microchip Number')
@@ -68,39 +68,28 @@ class VetPatient(models.Model):
             else:
                 patient.age = ''
 
-    @api.depends('birth_date')
-    def _compute_age_fields(self):
-        """Compute age_years and age_months from birth date"""
-        from datetime import date
-        for patient in self:
-            if patient.birth_date:
-                today = date.today()
-                delta = today - patient.birth_date
-                patient.age_years = delta.days // 365
-                patient.age_months = (delta.days % 365) // 30
-            else:
-                patient.age_years = 0
-                patient.age_months = 0
-
-    def _inverse_age_fields(self):
-        """Calculate birth date from age_years and age_months"""
-        from datetime import date
-        from dateutil.relativedelta import relativedelta
-        for patient in self:
-            if patient.age_years or patient.age_months:
-                today = date.today()
-                years = patient.age_years or 0
-                months = patient.age_months or 0
-                patient.birth_date = today - relativedelta(years=years, months=months)
-                # Mark birth date as approximate since it was calculated from age
-                patient.birth_date_approximate = True
+    @api.onchange('age_years', 'age_months')
+    def _onchange_age_fields(self):
+        """When age is entered, calculate birth date and mark as approximate"""
+        if self.age_years or self.age_months:
+            from datetime import date
+            from dateutil.relativedelta import relativedelta
+            today = date.today()
+            years = self.age_years or 0
+            months = self.age_months or 0
+            self.birth_date = today - relativedelta(years=years, months=months)
+            self.birth_date_approximate = True
 
     @api.onchange('birth_date')
     def _onchange_birth_date(self):
-        """When birth date is manually entered, mark it as exact (not approximate)"""
+        """When birth date is manually entered, update age fields and mark as exact"""
         if self.birth_date:
-            # Only set to False if user is manually entering birth date
-            # (not when it's being calculated from age)
+            from datetime import date
+            today = date.today()
+            delta = today - self.birth_date
+            self.age_years = delta.days // 365
+            self.age_months = (delta.days % 365) // 30
+            # Mark as exact since user entered birth date directly
             self.birth_date_approximate = False
 
     @api.depends('weight', 'weight_unit')
