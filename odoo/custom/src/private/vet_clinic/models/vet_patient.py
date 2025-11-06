@@ -71,26 +71,33 @@ class VetPatient(models.Model):
     @api.onchange('age_years', 'age_months')
     def _onchange_age_fields(self):
         """When age is entered, calculate birth date and mark as approximate"""
+        # Only process if user actually entered age values
         if self.age_years or self.age_months:
             from datetime import date
             from dateutil.relativedelta import relativedelta
             today = date.today()
             years = self.age_years or 0
             months = self.age_months or 0
-            self.birth_date = today - relativedelta(years=years, months=months)
+            # Calculate birth date from age
+            calculated_birth_date = today - relativedelta(years=years, months=months)
+            # Set a flag in context to prevent _onchange_birth_date from clearing these fields
+            self = self.with_context(age_calculation=True)
+            self.birth_date = calculated_birth_date
             self.birth_date_approximate = True
 
     @api.onchange('birth_date')
     def _onchange_birth_date(self):
-        """When birth date is manually entered, update age fields and mark as exact"""
+        """When birth date is manually entered, mark as exact and clear age inputs"""
+        # Don't process if this change came from age calculation
+        if self.env.context.get('age_calculation'):
+            return
+
         if self.birth_date:
-            from datetime import date
-            today = date.today()
-            delta = today - self.birth_date
-            self.age_years = delta.days // 365
-            self.age_months = (delta.days % 365) // 30
-            # Mark as exact since user entered birth date directly
+            # When user edits birth_date directly, mark as exact (not approximate)
+            # and clear the age input fields
             self.birth_date_approximate = False
+            self.age_years = 0
+            self.age_months = 0
 
     @api.depends('weight', 'weight_unit')
     def _compute_weight_display(self):
