@@ -57,7 +57,7 @@
                                 </div>
                             </div>
                             <div invisible="age_entry_mode == True">
-                                <label string="Age"/>
+                                <label for="age" string="Age"/>
                                 <field name="age" readonly="1"/>
                             </div>
                             <field name="birth_date_approximate" invisible="1"/>
