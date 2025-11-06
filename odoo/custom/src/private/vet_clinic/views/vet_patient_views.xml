@@ -40,14 +40,19 @@
                             <field name="gender"/>
                         </group>
                         <group>
-                            <label for="age_years" string="Age"/>
+                            <label for="age_years" string="Age (Approximate)"/>
                             <div class="o_row">
                                 <field name="age_years" class="oe_inline"/>
                                 <span>years</span>
                                 <field name="age_months" class="oe_inline"/>
                                 <span>months</span>
                             </div>
-                            <field name="birth_date" readonly="1" string="Calculated Birth Date"/>
+                            <label for="birth_date" string="Or Birth Date (Exact)"/>
+                            <div class="o_row">
+                                <field name="birth_date" class="oe_inline"/>
+                                <field name="birth_date_approximate" invisible="1"/>
+                                <span class="badge badge-warning" invisible="birth_date_approximate == False">Approximate</span>
+                            </div>
                             <label for="weight_display" string="Weight"/>
                             <div class="o_row">
                                 <field name="weight_display" class="oe_inline"/>

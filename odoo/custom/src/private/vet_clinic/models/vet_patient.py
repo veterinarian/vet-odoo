@@ -19,6 +19,8 @@ class VetPatient(models.Model):
     ], string='Gender', default='unknown', tracking=True)
 
     birth_date = fields.Date(string='Date of Birth', tracking=True)
+    birth_date_approximate = fields.Boolean(string='Approximate Birth Date', default=False, tracking=True,
+                                             help='Indicates if birth date was calculated from age rather than provided exactly')
     age = fields.Char(string='Age', compute='_compute_age', store=False)
 
     # Age input fields (inverse computation)
@@ -90,6 +92,16 @@ class VetPatient(models.Model):
                 years = patient.age_years or 0
                 months = patient.age_months or 0
                 patient.birth_date = today - relativedelta(years=years, months=months)
+                # Mark birth date as approximate since it was calculated from age
+                patient.birth_date_approximate = True
+
+    @api.onchange('birth_date')
+    def _onchange_birth_date(self):
+        """When birth date is manually entered, mark it as exact (not approximate)"""
+        if self.birth_date:
+            # Only set to False if user is manually entering birth date
+            # (not when it's being calculated from age)
+            self.birth_date_approximate = False
 
     @api.depends('weight', 'weight_unit')
     def _compute_weight_display(self):
