@@ -40,18 +40,29 @@
                             <field name="gender"/>
                         </group>
                         <group>
-                            <label for="age_years" string="Age (Approximate)"/>
+                            <field name="age_entry_mode" invisible="1"/>
+                            <label for="birth_date"/>
                             <div class="o_row">
-                                <field name="age_years" class="oe_inline"/>
-                                <span>years</span>
-                                <field name="age_months" class="oe_inline"/>
-                                <span>months</span>
+                                <field name="birth_date" class="oe_inline" readonly="age_entry_mode == True"/>
+                                <button name="action_toggle_age_entry_mode" type="object" string="Enter Age Instead" class="btn-link" invisible="age_entry_mode == True"/>
+                                <button name="action_toggle_age_entry_mode" type="object" string="Enter Birth Date Instead" class="btn-link" invisible="age_entry_mode == False"/>
                             </div>
-                            <label for="birth_date" string="Or Birth Date (Exact)"/>
-                            <div class="o_row">
-                                <field name="birth_date" class="oe_inline"/>
-                                <field name="birth_date_approximate" invisible="1"/>
-                                <span class="badge badge-warning" invisible="birth_date_approximate == False">Approximate</span>
+                            <div invisible="age_entry_mode == False">
+                                <label for="age_years" string="Age (Years/Months)"/>
+                                <div class="o_row">
+                                    <field name="age_years" class="oe_inline" placeholder="0"/>
+                                    <span>years</span>
+                                    <field name="age_months" class="oe_inline" placeholder="0"/>
+                                    <span>months</span>
+                                </div>
+                            </div>
+                            <div invisible="age_entry_mode == True">
+                                <label string="Age"/>
+                                <field name="age" readonly="1"/>
+                            </div>
+                            <field name="birth_date_approximate" invisible="1"/>
+                            <div class="alert alert-warning" invisible="birth_date_approximate == False" style="padding: 5px; margin: 5px 0;">
+                                Birth date is approximate (calculated from age)
                             </div>
                             <label for="weight_display" string="Weight"/>
                             <div class="o_row">
