@@ -1,0 +1,5 @@
+# See https://github.com/Tecnativa/doodba#optodoocustomsrcaddonsyaml
+
+# Cybro Addons - Accounting Kit
+cybro-addons:
+  - base_accounting_kit
