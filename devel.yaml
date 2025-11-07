@@ -44,6 +44,9 @@ services:
       WDB_WEB_PORT: "17984"
       # To avoid installing demo data export DOODBA_WITHOUT_DEMO=all
       WITHOUT_DEMO: "${DOODBA_WITHOUT_DEMO-false}"
+      # Default modules to install on fresh database (used by init-db.sh)
+      # To initialize with these modules, run: ./init-db.sh
+      ODOO_DEFAULT_MODULES: "account,stock,purchase,point_of_sale,base_accounting_kit,hr,vet_clinic,calendar"
     volumes:
       - ./odoo/custom:/opt/odoo/custom:ro,z
       - ./odoo/auto:/opt/odoo/auto:rw,z

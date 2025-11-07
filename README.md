@@ -30,12 +30,32 @@ A professional Odoo 17 deployment for veterinary clinic management, built with D
 git clone <repository-url>
 cd vet-odoo
 
+# Build the Docker images (first time only)
+docker-compose -f devel.yaml build
+
+# Initialize database with all required modules
+./init-db.sh
+
 # Start development environment
 docker-compose -f devel.yaml up
 
-# Access Odoo at http://localhost:8069
-# Create database and install "Veterinary Clinic" module
+# Access Odoo at http://localhost:17069
+# Login with admin credentials set during initialization
 ```
+
+### Automatic Module Installation
+
+The `init-db.sh` script automatically installs the following modules on a fresh database:
+- **account** - Accounting & Invoicing
+- **stock** - Inventory Management
+- **purchase** - Purchase Management
+- **point_of_sale** - Point of Sale
+- **base_accounting_kit** - Extended accounting features
+- **hr** - Human Resources
+- **vet_clinic** - Veterinary Clinic Management (custom)
+- **calendar** - Calendar & Activities
+
+To customize the module list, edit `ODOO_DEFAULT_MODULES` in `devel.yaml`.
 
 ## Project Structure
 
