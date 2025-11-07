@@ -1,5 +1,3 @@
-version: "2.4"
-
 services:
   odoo:
     image: ghcr.io/tecnativa/odoo-base:17.0
@@ -17,7 +15,7 @@ services:
       PROXY_MODE: "true"
     tty: true
     volumes:
-      - filestore:/var/lib/odoo:z
+      - filestore:/var/lib/odoo
     labels:
       traefik.backend.buffering.retryExpression: IsNetworkError() && Attempts() < 5
       traefik.docker.network: "inverseproxy_shared"
@@ -33,7 +31,7 @@ services:
       CONF_EXTRA: |
         work_mem = 512MB
     volumes:
-      - db:/var/lib/postgresql/data:z
+      - db:/var/lib/postgresql/data
 
   smtpfake:
     image: docker.io/mailhog/mailhog
