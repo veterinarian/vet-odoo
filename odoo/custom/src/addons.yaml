@@ -3,3 +3,4 @@
 # Cybro Addons - Accounting Kit
 cybro-addons:
   - base_accounting_kit
+  - base_account_budget
