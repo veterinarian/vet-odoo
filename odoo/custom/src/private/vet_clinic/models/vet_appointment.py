@@ -29,9 +29,6 @@ class VetAppointment(models.Model):
     )
 
     appointment_date = fields.Datetime(required=True, tracking=True)
-    appointment_date_end = fields.Datetime(
-        string="End Date", compute="_compute_appointment_date_end", store=True
-    )
     duration = fields.Float(string="Duration (hours)", default=0.5)
 
     appointment_type = fields.Selection(
@@ -99,19 +96,6 @@ class VetAppointment(models.Model):
                 )
             else:
                 appointment.display_name = appointment.name or _("New")
-
-    @api.depends("appointment_date", "duration")
-    def _compute_appointment_date_end(self):
-        """Compute end date based on start date and duration"""
-        from datetime import timedelta
-
-        for appointment in self:
-            if appointment.appointment_date and appointment.duration:
-                appointment.appointment_date_end = (
-                    appointment.appointment_date + timedelta(hours=appointment.duration)
-                )
-            else:
-                appointment.appointment_date_end = appointment.appointment_date
 
     @api.model_create_multi
     def create(self, vals_list):
