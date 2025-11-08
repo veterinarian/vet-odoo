@@ -93,17 +93,13 @@ class VetAppointment(models.Model):
         store=False,
     )
 
-    @api.depends("patient_id", "owner_id", "appointment_date")
+    @api.depends("patient_id", "owner_id")
     def _compute_display_name(self):
         """Compute display name showing patient and owner"""
         for appointment in self:
             if appointment.patient_id and appointment.owner_id:
-                date_str = ""
-                if appointment.appointment_date:
-                    date_str = appointment.appointment_date.strftime("%Y-%m-%d %H:%M")
                 appointment.display_name = (
                     f"{appointment.patient_id.name} - {appointment.owner_id.name}"
-                    + (f" ({date_str})" if date_str else "")
                 )
             else:
                 appointment.display_name = appointment.name or _("New")
