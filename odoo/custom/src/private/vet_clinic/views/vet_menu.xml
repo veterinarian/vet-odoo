@@ -1,37 +1,43 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
     <!-- Main Menu -->
-    <menuitem id="menu_vet_clinic_root"
-              name="Veterinary"
-              sequence="10"/>
+    <menuitem id="menu_vet_clinic_root" name="Veterinary" sequence="10" />
 
     <!-- Appointments Menu -->
-    <menuitem id="menu_vet_appointments"
-              name="Appointments"
-              parent="menu_vet_clinic_root"
-              sequence="10"
-              action="action_vet_appointment"/>
+    <menuitem
+        id="menu_vet_appointments"
+        name="Appointments"
+        parent="menu_vet_clinic_root"
+        sequence="10"
+        action="action_vet_appointment"
+    />
 
     <!-- Patients Menu -->
-    <menuitem id="menu_vet_patients"
-              name="Patients"
-              parent="menu_vet_clinic_root"
-              sequence="20"
-              action="action_vet_patient"/>
+    <menuitem
+        id="menu_vet_patients"
+        name="Patients"
+        parent="menu_vet_clinic_root"
+        sequence="20"
+        action="action_vet_patient"
+    />
 
     <!-- Owners Menu -->
-    <menuitem id="menu_vet_owners"
-              name="Owners"
-              parent="menu_vet_clinic_root"
-              sequence="30"
-              action="action_vet_owner"/>
+    <menuitem
+        id="menu_vet_owners"
+        name="Owners"
+        parent="menu_vet_clinic_root"
+        sequence="30"
+        action="action_vet_owner"
+    />
 
     <!-- Configuration Menu -->
-    <menuitem id="menu_vet_config"
-              name="Configuration"
-              parent="menu_vet_clinic_root"
-              sequence="100"
-              groups="group_vet_clinic_manager"/>
+    <menuitem
+        id="menu_vet_config"
+        name="Configuration"
+        parent="menu_vet_clinic_root"
+        sequence="100"
+        groups="group_vet_clinic_manager"
+    />
 
     <!-- Species Configuration -->
     <record id="action_vet_species" model="ir.actions.act_window">
@@ -40,9 +46,27 @@
         <field name="view_mode">tree,form</field>
     </record>
 
-    <menuitem id="menu_vet_species"
-              name="Species"
-              parent="menu_vet_config"
-              sequence="10"
-              action="action_vet_species"/>
+    <menuitem
+        id="menu_vet_species"
+        name="Species"
+        parent="menu_vet_config"
+        sequence="10"
+        action="action_vet_species"
+    />
+
+    <menuitem
+        id="menu_vet_provider_types"
+        name="Provider Types"
+        parent="menu_vet_config"
+        sequence="20"
+        action="action_vet_provider_type"
+    />
+
+    <menuitem
+        id="menu_vet_rooms"
+        name="Rooms"
+        parent="menu_vet_config"
+        sequence="30"
+        action="action_vet_room"
+    />
 </odoo>

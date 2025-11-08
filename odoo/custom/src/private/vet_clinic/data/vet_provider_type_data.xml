@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+        <!-- Provider Types (can provide services) -->
+        <record id="provider_type_doctor" model="vet.provider.type">
+            <field name="name">Doctor</field>
+            <field name="sequence">10</field>
+            <field name="is_provider">True</field>
+        </record>
+
+        <record id="provider_type_tech" model="vet.provider.type">
+            <field name="name">Tech</field>
+            <field name="sequence">20</field>
+            <field name="is_provider">True</field>
+        </record>
+
+        <record id="provider_type_groomer" model="vet.provider.type">
+            <field name="name">Groomer</field>
+            <field name="sequence">30</field>
+            <field name="is_provider">True</field>
+        </record>
+
+        <!-- Non-Provider Types (support staff) -->
+        <record id="provider_type_receptionist" model="vet.provider.type">
+            <field name="name">Receptionist</field>
+            <field name="sequence">40</field>
+            <field name="is_provider">False</field>
+        </record>
+
+        <record id="provider_type_bookkeeper" model="vet.provider.type">
+            <field name="name">Bookkeeper</field>
+            <field name="sequence">50</field>
+            <field name="is_provider">False</field>
+        </record>
+
+        <record id="provider_type_accountant" model="vet.provider.type">
+            <field name="name">Accountant</field>
+            <field name="sequence">60</field>
+            <field name="is_provider">False</field>
+        </record>
+
+        <record id="provider_type_assistant" model="vet.provider.type">
+            <field name="name">Assistant</field>
+            <field name="sequence">70</field>
+            <field name="is_provider">False</field>
+        </record>
+</odoo>

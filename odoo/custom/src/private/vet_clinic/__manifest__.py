@@ -1,9 +1,9 @@
 {
-    'name': 'Veterinary Clinic',
-    'version': '17.0.1.0.0',
-    'category': 'Healthcare',
-    'summary': 'Veterinary clinic management system',
-    'description': """
+    "name": "Veterinary Clinic",
+    "version": "17.0.1.0.0",
+    "category": "Healthcare",
+    "summary": "Veterinary clinic management system",
+    "description": """
         Veterinary Clinic Management
         =============================
 
@@ -15,25 +15,29 @@
         * Treatment plans
         * Medication prescriptions
     """,
-    'author': 'veterinarian',
-    'website': 'https://github.com/veterinarian/vet-odoo',
-    'license': 'AGPL-3',
-    'depends': [
-        'base',
-        'mail',
-        'calendar',
+    "author": "veterinarian",
+    "website": "https://github.com/veterinarian/vet-odoo",
+    "license": "AGPL-3",
+    "depends": [
+        "base",
+        "mail",
+        "calendar",
     ],
-    'data': [
-        'security/vet_clinic_security.xml',
-        'security/ir.model.access.csv',
-        'data/vet_species_data.xml',
-        'views/vet_owner_views.xml',
-        'views/vet_appointment_views.xml',
-        'views/vet_patient_views.xml',
-        'views/vet_menu.xml',
+    "data": [
+        "security/vet_clinic_security.xml",
+        "security/ir.model.access.csv",
+        "data/vet_species_data.xml",
+        "data/vet_provider_type_data.xml",
+        "data/vet_room_data.xml",
+        "views/vet_provider_type_views.xml",
+        "views/vet_room_views.xml",
+        "views/vet_owner_views.xml",
+        "views/vet_appointment_views.xml",
+        "views/vet_patient_views.xml",
+        "views/vet_menu.xml",
     ],
-    'demo': [],
-    'installable': True,
-    'application': True,
-    'auto_install': False,
+    "demo": [],
+    "installable": True,
+    "application": True,
+    "auto_install": False,
 }
