@@ -141,6 +141,27 @@
         </field>
     </record>
 
+    <!-- Appointment Timeline View (Room Schedule) -->
+    <record id="view_vet_appointment_timeline" model="ir.ui.view">
+        <field name="name">vet.appointment.timeline</field>
+        <field name="model">vet.appointment</field>
+        <field name="arch" type="xml">
+            <timeline
+                date_start="appointment_date"
+                date_stop="appointment_date_end"
+                default_group_by="room_id"
+                event_open_popup="true"
+                colors="#ec7063:state=='cancelled';#2ecc71:state=='done';#3498db:state=='in_progress';#f39c12:state=='confirmed';#95a5a6:state=='scheduled'"
+            >
+                <field name="room_id" />
+                <field name="patient_id" />
+                <field name="owner_id" />
+                <field name="provider_id" />
+                <field name="state" />
+            </timeline>
+        </field>
+    </record>
+
     <!-- Appointment Search View -->
     <record id="view_vet_appointment_search" model="ir.ui.view">
         <field name="name">vet.appointment.search</field>
@@ -229,7 +250,7 @@
     <record id="action_vet_appointment" model="ir.actions.act_window">
         <field name="name">Appointments</field>
         <field name="res_model">vet.appointment</field>
-        <field name="view_mode">calendar,tree,form</field>
+        <field name="view_mode">calendar,timeline,tree,form</field>
         <field name="context">{'search_default_today': 1}</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">

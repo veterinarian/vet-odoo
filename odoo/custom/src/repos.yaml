@@ -23,3 +23,12 @@
   target: origin $ODOO_VERSION
   merges:
     - origin $ODOO_VERSION
+
+./web:
+  defaults:
+    depth: $DEPTH_DEFAULT
+  remotes:
+    origin: https://github.com/OCA/web.git
+  target: origin $ODOO_VERSION
+  merges:
+    - origin $ODOO_VERSION

@@ -22,6 +22,7 @@
         "base",
         "mail",
         "calendar",
+        "web_timeline",
     ],
     "data": [
         "security/vet_clinic_security.xml",

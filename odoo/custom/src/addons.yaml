@@ -4,3 +4,7 @@
 cybro-addons:
   - base_accounting_kit
   - base_account_budget
+
+# OCA Web - Timeline View
+web:
+  - web_timeline
