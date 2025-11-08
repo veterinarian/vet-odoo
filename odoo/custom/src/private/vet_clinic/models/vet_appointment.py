@@ -244,6 +244,14 @@ class VetAppointment(models.Model):
         self, domain, fields, groupby, offset=0, limit=None, orderby=False, lazy=True
     ):
         """Override to show all rooms in timeline view even when empty"""
+        import logging
+
+        _logger = logging.getLogger(__name__)
+        _logger.info(
+            f"read_group called: groupby={groupby}, fields={fields}, "
+            f"domain={domain}"
+        )
+
         result = super().read_group(
             domain,
             fields,
@@ -253,6 +261,8 @@ class VetAppointment(models.Model):
             orderby=orderby,
             lazy=lazy,
         )
+
+        _logger.info(f"read_group result before modification: {result}")
 
         # If grouping by room_id, ensure all active rooms are included
         if groupby and any("room_id" in group for group in groupby):
@@ -265,15 +275,24 @@ class VetAppointment(models.Model):
                 if group.get("room_id"):
                     existing_room_ids.add(group["room_id"][0])
 
+            _logger.info(f"Existing room IDs: {existing_room_ids}")
+            _logger.info(f"All rooms: {[(r.id, r.name) for r in all_rooms]}")
+
             # Add missing rooms with count 0
             for room in all_rooms:
                 if room.id not in existing_room_ids:
-                    result.append(
-                        {
-                            "room_id": (room.id, room.name),
-                            "room_id_count": 0,
-                            "__domain": domain + [("room_id", "=", room.id)],
-                        }
-                    )
+                    new_group = {
+                        "room_id": (room.id, room.name),
+                        "room_id_count": 0,
+                        "__domain": domain + [("room_id", "=", room.id)],
+                        "__count": 0,
+                    }
+                    # Add any other fields that were requested
+                    for field in fields:
+                        if field not in new_group and field != "room_id":
+                            new_group[field] = 0 if "count" in field else False
+                    result.append(new_group)
+                    _logger.info(f"Added missing room: {room.name}")
 
+        _logger.info(f"read_group result after modification: {result}")
         return result
