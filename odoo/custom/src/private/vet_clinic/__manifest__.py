@@ -31,6 +31,7 @@
         "data/vet_room_data.xml",
         "views/vet_provider_type_views.xml",
         "views/vet_room_views.xml",
+        "views/res_users_views.xml",
         "views/vet_owner_views.xml",
         "views/vet_appointment_views.xml",
         "views/vet_patient_views.xml",

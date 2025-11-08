@@ -82,7 +82,11 @@
                         <group>
                             <field name="appointment_date" />
                             <field name="duration" />
-                            <field name="provider_id" />
+                            <field
+                                name="provider_id"
+                                domain="[('is_provider', '=', True)]"
+                                context="{'default_is_provider': True}"
+                            />
                             <field name="room_id" />
                             <field name="veterinarian_id" invisible="1" />
                         </group>

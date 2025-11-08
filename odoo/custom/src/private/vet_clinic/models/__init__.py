@@ -3,4 +3,5 @@ from . import vet_owner
 from . import vet_species
 from . import vet_provider_type
 from . import vet_room
+from . import res_users
 from . import vet_appointment

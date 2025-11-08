@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- Inherit User Form to add Provider Type -->
+    <record id="view_users_form_vet_clinic" model="ir.ui.view">
+        <field name="name">res.users.form.vet.clinic</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='preferences']" position="after">
+                <page string="Veterinary Clinic" name="vet_clinic">
+                    <group>
+                        <group>
+                            <field name="provider_type_id" />
+                            <field name="is_provider" />
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Inherit User Form (Simple) to add Provider Type -->
+    <record id="view_users_simple_form_vet_clinic" model="ir.ui.view">
+        <field name="name">res.users.form.simple.vet.clinic</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form_simple_modif" />
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='preference']" position="after">
+                <group string="Veterinary Clinic" name="vet_clinic">
+                    <field name="provider_type_id" />
+                    <field name="is_provider" />
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>
