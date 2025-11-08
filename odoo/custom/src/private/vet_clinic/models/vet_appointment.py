@@ -240,45 +240,35 @@ class VetAppointment(models.Model):
         self.write({"state": "cancelled"})
 
     @api.model
-    def web_read_group(
-        self,
-        domain,
-        fields,
-        groupby,
-        limit=None,
-        offset=0,
-        orderby=False,
-        lazy=True,
-        expand=False,
-        expand_limit=None,
-        expand_orderby=False,
+    def read_group(
+        self, domain, fields, groupby, offset=0, limit=None, orderby=False, lazy=True
     ):
         """Override to show all rooms in timeline view even when empty"""
-        result = super().web_read_group(
+        result = super().read_group(
             domain,
             fields,
             groupby,
-            limit=limit,
             offset=offset,
+            limit=limit,
             orderby=orderby,
             lazy=lazy,
-            expand=expand,
-            expand_limit=expand_limit,
-            expand_orderby=expand_orderby,
         )
 
-        # If grouping by room_id, ensure all rooms are included
-        if groupby and "room_id" in groupby[0]:
-            all_rooms = self.env["vet.room"].search([])
-            existing_room_ids = {
-                group.get("room_id")[0] if group.get("room_id") else None
-                for group in result["groups"]
-            }
+        # If grouping by room_id, ensure all active rooms are included
+        if groupby and any("room_id" in group for group in groupby):
+            all_rooms = self.env["vet.room"].search(
+                [("active", "=", True)], order="sequence, name"
+            )
+            existing_room_ids = set()
+
+            for group in result:
+                if group.get("room_id"):
+                    existing_room_ids.add(group["room_id"][0])
 
             # Add missing rooms with count 0
             for room in all_rooms:
                 if room.id not in existing_room_ids:
-                    result["groups"].append(
+                    result.append(
                         {
                             "room_id": (room.id, room.name),
                             "room_id_count": 0,
