@@ -75,7 +75,7 @@ class VetAppointment(models.Model):
     notes = fields.Text(string="Additional Notes")
 
     has_overlap = fields.Boolean(
-        string="Has Overlap", compute="_compute_has_overlap", store=False
+        string="Has Overlap", compute="_compute_has_overlap", store=True
     )
     overlap_warning = fields.Html(
         string="Overlap Warning", compute="_compute_has_overlap", store=False
