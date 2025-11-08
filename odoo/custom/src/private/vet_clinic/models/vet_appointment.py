@@ -238,3 +238,52 @@ class VetAppointment(models.Model):
 
     def action_cancel(self):
         self.write({"state": "cancelled"})
+
+    @api.model
+    def web_read_group(
+        self,
+        domain,
+        fields,
+        groupby,
+        limit=None,
+        offset=0,
+        orderby=False,
+        lazy=True,
+        expand=False,
+        expand_limit=None,
+        expand_orderby=False,
+    ):
+        """Override to show all rooms in timeline view even when empty"""
+        result = super().web_read_group(
+            domain,
+            fields,
+            groupby,
+            limit=limit,
+            offset=offset,
+            orderby=orderby,
+            lazy=lazy,
+            expand=expand,
+            expand_limit=expand_limit,
+            expand_orderby=expand_orderby,
+        )
+
+        # If grouping by room_id, ensure all rooms are included
+        if groupby and "room_id" in groupby[0]:
+            all_rooms = self.env["vet.room"].search([])
+            existing_room_ids = {
+                group.get("room_id")[0] if group.get("room_id") else None
+                for group in result["groups"]
+            }
+
+            # Add missing rooms with count 0
+            for room in all_rooms:
+                if room.id not in existing_room_ids:
+                    result["groups"].append(
+                        {
+                            "room_id": (room.id, room.name),
+                            "room_id_count": 0,
+                            "__domain": domain + [("room_id", "=", room.id)],
+                        }
+                    )
+
+        return result
