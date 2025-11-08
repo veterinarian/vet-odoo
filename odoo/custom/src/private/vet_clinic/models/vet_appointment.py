@@ -53,11 +53,10 @@ class VetAppointment(models.Model):
     provider_id = fields.Many2one(
         "res.users",
         string="Provider",
-        required=True,
         tracking=True,
         help="The staff member providing the service",
     )
-    room_id = fields.Many2one("vet.room", string="Room", required=True, tracking=True)
+    room_id = fields.Many2one("vet.room", string="Room", tracking=True)
 
     state = fields.Selection(
         [
@@ -88,7 +87,7 @@ class VetAppointment(models.Model):
     )
     overlap_warning = fields.Html(
         string="Overlap Warning",
-        compute="_compute_has_overlap",
+        compute="_compute_overlap_warning",
         compute_sudo=False,
         store=False,
     )
@@ -113,63 +112,76 @@ class VetAppointment(models.Model):
                 ) or _("New")
         return super().create(vals_list)
 
+    def _get_overlapping_appointments(self):
+        """Helper method to find overlapping appointments.
+        Returns tuple of (provider_overlaps, room_overlaps)
+        """
+        from datetime import timedelta
+
+        self.ensure_one()
+
+        if (
+            not self.appointment_date
+            or not self.duration
+            or not (self.provider_id or self.room_id)
+        ):
+            return [], []
+
+        # Calculate end time
+        start_time = self.appointment_date
+        end_time = start_time + timedelta(hours=self.duration)
+
+        # Build domain to find overlapping appointments
+        domain = [
+            ("state", "not in", ["cancelled", "done"]),
+            ("appointment_date", "<", end_time),
+        ]
+
+        # Exclude current appointment if it has a real ID (not a new record)
+        if self.id and isinstance(self.id, int):
+            domain.append(("id", "!=", self.id))
+
+        # Search for overlaps
+        overlapping = self.env["vet.appointment"].search(domain)
+
+        provider_overlaps = []
+        room_overlaps = []
+
+        for other in overlapping:
+            other_end_time = other.appointment_date + timedelta(hours=other.duration)
+
+            # Check if times actually overlap
+            if other_end_time > start_time:
+                # Check provider overlap
+                if self.provider_id and other.provider_id == self.provider_id:
+                    provider_overlaps.append(other)
+
+                # Check room overlap
+                if self.room_id and other.room_id == self.room_id:
+                    room_overlaps.append(other)
+
+        return provider_overlaps, room_overlaps
+
     @api.depends("appointment_date", "duration", "provider_id", "room_id", "state")
     def _compute_has_overlap(self):
         """Check for overlapping appointments with the same provider or room"""
-        from datetime import timedelta
-
         for appointment in self:
-            if (
-                not appointment.appointment_date
-                or not appointment.duration
-                or not (appointment.provider_id or appointment.room_id)
-            ):
-                appointment.has_overlap = False
-                appointment.overlap_warning = False
-                continue
-
-            # Calculate end time
-            start_time = appointment.appointment_date
-            end_time = start_time + timedelta(hours=appointment.duration)
-
-            # Build domain to find overlapping appointments
-            domain = [
-                ("state", "not in", ["cancelled", "done"]),
-                ("appointment_date", "<", end_time),
-            ]
-
-            # Exclude current appointment if it has a real ID (not a new record)
-            if appointment.id and isinstance(appointment.id, int):
-                domain.append(("id", "!=", appointment.id))
-
-            # Search for overlaps
-            overlapping = self.env["vet.appointment"].search(domain)
-
-            provider_overlaps = []
-            room_overlaps = []
-
-            for other in overlapping:
-                other_end_time = other.appointment_date + timedelta(
-                    hours=other.duration
-                )
-
-                # Check if times actually overlap
-                if other_end_time > start_time:
-                    # Check provider overlap
-                    if (
-                        appointment.provider_id
-                        and other.provider_id == appointment.provider_id
-                    ):
-                        provider_overlaps.append(other)
-
-                    # Check room overlap
-                    if appointment.room_id and other.room_id == appointment.room_id:
-                        room_overlaps.append(other)
-
+            (
+                provider_overlaps,
+                room_overlaps,
+            ) = appointment._get_overlapping_appointments()
             appointment.has_overlap = bool(provider_overlaps or room_overlaps)
 
-            # Build warning message
-            if appointment.has_overlap:
+    @api.depends("appointment_date", "duration", "provider_id", "room_id", "state")
+    def _compute_overlap_warning(self):
+        """Build warning message for overlapping appointments"""
+        for appointment in self:
+            (
+                provider_overlaps,
+                room_overlaps,
+            ) = appointment._get_overlapping_appointments()
+
+            if provider_overlaps or room_overlaps:
                 warnings = []
                 if provider_overlaps:
                     warnings.append("<strong>Provider Overlap:</strong>")

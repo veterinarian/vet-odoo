@@ -80,10 +80,11 @@
                             <field name="duration" />
                             <field
                                 name="provider_id"
+                                required="1"
                                 domain="[('is_provider', '=', True)]"
                                 context="{'default_is_provider': True}"
                             />
-                            <field name="room_id" />
+                            <field name="room_id" required="1" />
                             <field name="veterinarian_id" invisible="1" />
                         </group>
                     </group>
