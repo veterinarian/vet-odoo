@@ -12,15 +12,15 @@
                 decoration-muted="state=='cancelled'"
                 decoration-warning="has_overlap==True"
             >
-                <field name="name" />
                 <field name="appointment_date" />
                 <field name="patient_id" />
                 <field name="owner_id" />
                 <field name="appointment_type" />
                 <field name="provider_id" />
                 <field name="room_id" />
-                <field name="veterinarian_id" optional="hide" />
                 <field name="state" />
+                <field name="name" column_invisible="1" />
+                <field name="veterinarian_id" column_invisible="1" />
                 <field name="has_overlap" column_invisible="1" />
             </tree>
         </field>
@@ -67,11 +67,7 @@
                     />
                 </header>
                 <sheet>
-                    <div class="oe_title">
-                        <h1>
-                            <field name="name" readonly="1" />
-                        </h1>
-                    </div>
+                    <field name="name" invisible="1" />
                     <field name="overlap_warning" invisible="not overlap_warning" />
                     <group>
                         <group>
@@ -132,8 +128,10 @@
                 date_start="appointment_date"
                 color="provider_id"
                 mode="week"
+                event_open_popup="true"
             >
                 <field name="patient_id" />
+                <field name="owner_id" />
                 <field name="appointment_type" />
                 <field name="provider_id" />
                 <field name="room_id" />

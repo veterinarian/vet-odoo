@@ -14,6 +14,12 @@ class VetAppointment(models.Model):
         copy=False,
         readonly=True,
         default=lambda self: _("New"),
+        index=True,
+    )
+    display_name = fields.Char(
+        string="Display Name",
+        compute="_compute_display_name",
+        store=True,
     )
 
     patient_id = fields.Many2one(
@@ -86,6 +92,21 @@ class VetAppointment(models.Model):
         compute_sudo=False,
         store=False,
     )
+
+    @api.depends("patient_id", "owner_id", "appointment_date")
+    def _compute_display_name(self):
+        """Compute display name showing patient and owner"""
+        for appointment in self:
+            if appointment.patient_id and appointment.owner_id:
+                date_str = ""
+                if appointment.appointment_date:
+                    date_str = appointment.appointment_date.strftime("%Y-%m-%d %H:%M")
+                appointment.display_name = (
+                    f"{appointment.patient_id.name} - {appointment.owner_id.name}"
+                    + (f" ({date_str})" if date_str else "")
+                )
+            else:
+                appointment.display_name = appointment.name or _("New")
 
     @api.model_create_multi
     def create(self, vals_list):
