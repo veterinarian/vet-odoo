@@ -111,10 +111,13 @@ class VetAppointment(models.Model):
 
             # Build domain to find overlapping appointments
             domain = [
-                ("id", "!=", appointment.id),
                 ("state", "not in", ["cancelled", "done"]),
                 ("appointment_date", "<", end_time),
             ]
+
+            # Exclude current appointment if it has a real ID (not a new record)
+            if appointment.id and isinstance(appointment.id, int):
+                domain.append(("id", "!=", appointment.id))
 
             # Search for overlaps
             overlapping = self.env["vet.appointment"].search(domain)
