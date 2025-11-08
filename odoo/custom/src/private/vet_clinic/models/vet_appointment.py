@@ -17,7 +17,6 @@ class VetAppointment(models.Model):
         index=True,
     )
     display_name = fields.Char(
-        string="Display Name",
         compute="_compute_display_name",
         store=True,
     )
@@ -29,8 +28,9 @@ class VetAppointment(models.Model):
         "vet.owner", string="Owner", related="patient_id.owner_id", store=True
     )
 
-    appointment_date = fields.Datetime(
-        string="Appointment Date", required=True, tracking=True
+    appointment_date = fields.Datetime(required=True, tracking=True)
+    appointment_date_end = fields.Datetime(
+        string="End Date", compute="_compute_appointment_date_end", store=True
     )
     duration = fields.Float(string="Duration (hours)", default=0.5)
 
@@ -43,7 +43,6 @@ class VetAppointment(models.Model):
             ("followup", "Follow-up"),
             ("other", "Other"),
         ],
-        string="Appointment Type",
         default="checkup",
         required=True,
         tracking=True,
@@ -73,20 +72,18 @@ class VetAppointment(models.Model):
     )
 
     reason = fields.Text(string="Reason for Visit", required=True)
-    diagnosis = fields.Text(string="Diagnosis")
-    treatment = fields.Text(string="Treatment")
-    prescription = fields.Text(string="Prescription")
+    diagnosis = fields.Text()
+    treatment = fields.Text()
+    prescription = fields.Text()
 
     notes = fields.Text(string="Additional Notes")
 
     has_overlap = fields.Boolean(
-        string="Has Overlap",
         compute="_compute_has_overlap",
         compute_sudo=False,
         store=True,
     )
     overlap_warning = fields.Html(
-        string="Overlap Warning",
         compute="_compute_overlap_warning",
         compute_sudo=False,
         store=False,
@@ -102,6 +99,19 @@ class VetAppointment(models.Model):
                 )
             else:
                 appointment.display_name = appointment.name or _("New")
+
+    @api.depends("appointment_date", "duration")
+    def _compute_appointment_date_end(self):
+        """Compute end date based on start date and duration"""
+        from datetime import timedelta
+
+        for appointment in self:
+            if appointment.appointment_date and appointment.duration:
+                appointment.appointment_date_end = (
+                    appointment.appointment_date + timedelta(hours=appointment.duration)
+                )
+            else:
+                appointment.appointment_date_end = appointment.appointment_date
 
     @api.model_create_multi
     def create(self, vals_list):

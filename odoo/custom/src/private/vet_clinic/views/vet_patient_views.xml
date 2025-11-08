@@ -1,17 +1,17 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
     <!-- Patient Tree View -->
     <record id="view_vet_patient_tree" model="ir.ui.view">
         <field name="name">vet.patient.tree</field>
         <field name="model">vet.patient</field>
         <field name="arch" type="xml">
-            <tree string="Patients">
-                <field name="name"/>
-                <field name="owner_id"/>
-                <field name="species_id"/>
-                <field name="breed"/>
-                <field name="gender"/>
-                <field name="age"/>
+            <tree>
+                <field name="name" />
+                <field name="owner_id" />
+                <field name="species_id" />
+                <field name="breed" />
+                <field name="gender" />
+                <field name="age" />
             </tree>
         </field>
     </record>
@@ -23,93 +23,155 @@
         <field name="arch" type="xml">
             <form string="Patient">
                 <header>
-                    <button name="%(action_vet_appointment_new)d" type="action" string="New Appointment" class="oe_highlight"/>
+                    <button
+                        name="%(action_vet_appointment_new)d"
+                        type="action"
+                        string="New Appointment"
+                        class="oe_highlight"
+                    />
                 </header>
                 <sheet>
-                    <field name="image" widget="image" class="oe_avatar"/>
+                    <field name="image" widget="image" class="oe_avatar" />
                     <div class="oe_title">
                         <h1>
-                            <field name="name" placeholder="Patient Name"/>
+                            <field name="name" placeholder="Patient Name" />
                         </h1>
                     </div>
                     <group>
                         <group>
-                            <field name="owner_id"/>
-                            <field name="species_id"/>
-                            <field name="breed"/>
-                            <field name="gender"/>
+                            <field name="owner_id" />
+                            <field name="species_id" />
+                            <field name="breed" />
+                            <field name="gender" />
                         </group>
                         <group>
-                            <field name="age_entry_mode" invisible="1"/>
-                            <field name="birth_date_approximate" invisible="1"/>
+                            <field name="age_entry_mode" invisible="1" />
+                            <field name="birth_date_approximate" invisible="1" />
 
                             <!-- Birth Date Entry Mode (default) -->
-                            <label for="birth_date" invisible="age_entry_mode == True"/>
+                            <label
+                                for="birth_date"
+                                invisible="age_entry_mode == True"
+                            />
                             <div class="o_row" invisible="age_entry_mode == True">
-                                <field name="birth_date" class="oe_inline"/>
-                                <button name="action_toggle_age_entry_mode" type="object" string="↔ Age" class="btn-link" title="Enter age instead"/>
+                                <field name="birth_date" class="oe_inline" />
+                                <button
+                                    name="action_toggle_age_entry_mode"
+                                    type="object"
+                                    string="↔ Age"
+                                    class="btn-link"
+                                    title="Enter age instead"
+                                />
                             </div>
 
-                            <label for="age" string="Age" invisible="age_entry_mode == True"/>
-                            <field name="age" readonly="1" invisible="age_entry_mode == True"/>
+                            <label
+                                for="age"
+                                string="Age"
+                                invisible="age_entry_mode == True"
+                            />
+                            <field
+                                name="age"
+                                readonly="1"
+                                invisible="age_entry_mode == True"
+                            />
 
                             <!-- Age Entry Mode -->
-                            <label for="birth_date" string="Birth Date (calculated)" invisible="age_entry_mode == False"/>
+                            <label
+                                for="birth_date"
+                                string="Birth Date (calculated)"
+                                invisible="age_entry_mode == False"
+                            />
                             <div class="o_row" invisible="age_entry_mode == False">
-                                <field name="birth_date" class="oe_inline" readonly="1"/>
-                                <button name="action_toggle_age_entry_mode" type="object" string="↔ Date" class="btn-link" title="Enter birth date instead"/>
-                                <span class="badge badge-warning ml-2" invisible="birth_date_approximate == False">Approximate</span>
+                                <field
+                                    name="birth_date"
+                                    class="oe_inline"
+                                    readonly="1"
+                                />
+                                <button
+                                    name="action_toggle_age_entry_mode"
+                                    type="object"
+                                    string="↔ Date"
+                                    class="btn-link"
+                                    title="Enter birth date instead"
+                                />
+                                <span
+                                    class="badge badge-warning ml-2"
+                                    invisible="birth_date_approximate == False"
+                                >Approximate</span>
                             </div>
 
-                            <label for="age_years" string="Age" invisible="age_entry_mode == False"/>
+                            <label
+                                for="age_years"
+                                string="Age"
+                                invisible="age_entry_mode == False"
+                            />
                             <div class="o_row" invisible="age_entry_mode == False">
-                                <field name="age_years" class="oe_inline" placeholder="0"/>
+                                <field
+                                    name="age_years"
+                                    class="oe_inline"
+                                    placeholder="0"
+                                />
                                 <span>years</span>
-                                <field name="age_months" class="oe_inline" placeholder="0"/>
+                                <field
+                                    name="age_months"
+                                    class="oe_inline"
+                                    placeholder="0"
+                                />
                                 <span>months</span>
                             </div>
 
-                            <label for="weight_display" string="Weight"/>
+                            <label for="weight_display" string="Weight" />
                             <div class="o_row">
-                                <field name="weight_display" class="oe_inline"/>
-                                <field name="weight_unit" class="oe_inline" widget="radio" options="{'horizontal': true}"/>
+                                <field name="weight_display" class="oe_inline" />
+                                <field
+                                    name="weight_unit"
+                                    class="oe_inline"
+                                    widget="radio"
+                                    options="{'horizontal': true}"
+                                />
                             </div>
-                            <field name="neutered"/>
+                            <field name="neutered" />
                         </group>
                     </group>
                     <group>
                         <group>
-                            <field name="color"/>
-                            <field name="microchip_number"/>
+                            <field name="color" />
+                            <field name="microchip_number" />
                         </group>
                         <group>
-                            <field name="active"/>
+                            <field name="active" />
                         </group>
                     </group>
                     <notebook>
                         <page string="Medical Information">
                             <group>
-                                <field name="allergies" placeholder="Known allergies..."/>
-                                <field name="medical_notes" placeholder="Medical notes and history..."/>
+                                <field
+                                    name="allergies"
+                                    placeholder="Known allergies..."
+                                />
+                                <field
+                                    name="medical_notes"
+                                    placeholder="Medical notes and history..."
+                                />
                             </group>
                         </page>
                         <page string="Appointments">
                             <field name="appointment_ids">
                                 <tree>
-                                    <field name="name"/>
-                                    <field name="appointment_date"/>
-                                    <field name="appointment_type"/>
-                                    <field name="veterinarian_id"/>
-                                    <field name="state"/>
+                                    <field name="name" />
+                                    <field name="appointment_date" />
+                                    <field name="appointment_type" />
+                                    <field name="veterinarian_id" />
+                                    <field name="state" />
                                 </tree>
                             </field>
                         </page>
                     </notebook>
                 </sheet>
                 <div class="oe_chatter">
-                    <field name="message_follower_ids"/>
-                    <field name="activity_ids"/>
-                    <field name="message_ids"/>
+                    <field name="message_follower_ids" />
+                    <field name="activity_ids" />
+                    <field name="message_ids" />
                 </div>
             </form>
         </field>
@@ -121,21 +183,28 @@
         <field name="model">vet.patient</field>
         <field name="arch" type="xml">
             <kanban>
-                <field name="id"/>
-                <field name="name"/>
-                <field name="owner_id"/>
-                <field name="species_id"/>
-                <field name="image"/>
+                <field name="id" />
+                <field name="name" />
+                <field name="owner_id" />
+                <field name="species_id" />
+                <field name="image" />
                 <templates>
                     <t t-name="kanban-box">
                         <div class="oe_kanban_global_click">
                             <div class="o_kanban_image">
-                                <img t-att-src="kanban_image('vet.patient', 'image', record.id.raw_value)" alt="Patient"/>
+                                <img
+                                    t-att-src="kanban_image('vet.patient', 'image', record.id.raw_value)"
+                                    alt="Patient"
+                                />
                             </div>
                             <div class="oe_kanban_details">
-                                <strong class="o_kanban_record_title"><field name="name"/></strong>
-                                <div><field name="species_id"/> - <field name="breed"/></div>
-                                <div>Owner: <field name="owner_id"/></div>
+                                <strong class="o_kanban_record_title"><field
+                                        name="name"
+                                    /></strong>
+                                <div><field name="species_id" /> - <field
+                                        name="breed"
+                                    /></div>
+                                <div>Owner: <field name="owner_id" /></div>
                             </div>
                         </div>
                     </t>
@@ -150,17 +219,37 @@
         <field name="model">vet.patient</field>
         <field name="arch" type="xml">
             <search string="Search Patients">
-                <field name="name"/>
-                <field name="owner_id"/>
-                <field name="species_id"/>
-                <field name="breed"/>
-                <field name="microchip_number"/>
-                <filter string="Active" name="active" domain="[('active', '=', True)]"/>
-                <filter string="Inactive" name="inactive" domain="[('active', '=', False)]"/>
+                <field name="name" />
+                <field name="owner_id" />
+                <field name="species_id" />
+                <field name="breed" />
+                <field name="microchip_number" />
+                <filter
+                    string="Active"
+                    name="active"
+                    domain="[('active', '=', True)]"
+                />
+                <filter
+                    string="Inactive"
+                    name="inactive"
+                    domain="[('active', '=', False)]"
+                />
                 <group expand="0" string="Group By">
-                    <filter string="Species" name="group_species" context="{'group_by': 'species_id'}"/>
-                    <filter string="Owner" name="group_owner" context="{'group_by': 'owner_id'}"/>
-                    <filter string="Gender" name="group_gender" context="{'group_by': 'gender'}"/>
+                    <filter
+                        string="Species"
+                        name="group_species"
+                        context="{'group_by': 'species_id'}"
+                    />
+                    <filter
+                        string="Owner"
+                        name="group_owner"
+                        context="{'group_by': 'owner_id'}"
+                    />
+                    <filter
+                        string="Gender"
+                        name="group_gender"
+                        context="{'group_by': 'gender'}"
+                    />
                 </group>
             </search>
         </field>

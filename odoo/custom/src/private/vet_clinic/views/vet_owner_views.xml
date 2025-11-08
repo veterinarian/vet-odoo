@@ -1,17 +1,17 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
     <!-- Owner Tree View -->
     <record id="view_vet_owner_tree" model="ir.ui.view">
         <field name="name">vet.owner.tree</field>
         <field name="model">vet.owner</field>
         <field name="arch" type="xml">
-            <tree string="Owners">
-                <field name="name"/>
-                <field name="email"/>
-                <field name="phone"/>
-                <field name="mobile"/>
-                <field name="city"/>
-                <field name="patient_count"/>
+            <tree>
+                <field name="name" />
+                <field name="email" />
+                <field name="phone" />
+                <field name="mobile" />
+                <field name="city" />
+                <field name="patient_count" />
             </tree>
         </field>
     </record>
@@ -25,52 +25,55 @@
                 <sheet>
                     <div class="oe_title">
                         <h1>
-                            <field name="name" placeholder="Owner Name"/>
+                            <field name="name" placeholder="Owner Name" />
                         </h1>
                     </div>
                     <group>
                         <group string="Contact Information">
-                            <field name="email" widget="email"/>
-                            <field name="phone" widget="phone"/>
-                            <field name="mobile" widget="phone"/>
+                            <field name="email" widget="email" />
+                            <field name="phone" widget="phone" />
+                            <field name="mobile" widget="phone" />
                         </group>
                         <group string="Other">
-                            <field name="patient_count"/>
-                            <field name="active"/>
+                            <field name="patient_count" />
+                            <field name="active" />
                         </group>
                     </group>
                     <group string="Address">
                         <group>
-                            <field name="street"/>
-                            <field name="street2"/>
-                            <field name="city"/>
+                            <field name="street" />
+                            <field name="street2" />
+                            <field name="city" />
                         </group>
                         <group>
-                            <field name="state_id"/>
-                            <field name="zip"/>
-                            <field name="country_id"/>
+                            <field name="state_id" />
+                            <field name="zip" />
+                            <field name="country_id" />
                         </group>
                     </group>
                     <notebook>
                         <page string="Pets">
                             <field name="patient_ids">
                                 <tree>
-                                    <field name="name"/>
-                                    <field name="species_id"/>
-                                    <field name="breed"/>
-                                    <field name="age"/>
+                                    <field name="name" />
+                                    <field name="species_id" />
+                                    <field name="breed" />
+                                    <field name="age" />
                                 </tree>
                             </field>
                         </page>
                         <page string="Notes">
-                            <field name="notes" placeholder="Additional notes about the owner..."/>
+                            <field
+                                name="notes"
+                                placeholder="Additional notes about the owner..."
+                            />
                         </page>
                     </notebook>
                 </sheet>
                 <div class="oe_chatter">
-                    <field name="message_follower_ids"/>
-                    <field name="activity_ids"/>
-                    <field name="message_ids"/>
+                    <field name="message_follower_ids" />
+                    <field name="activity_ids" />
+                    <field name="message_ids" />
                 </div>
             </form>
         </field>
@@ -82,16 +85,32 @@
         <field name="model">vet.owner</field>
         <field name="arch" type="xml">
             <search string="Search Owners">
-                <field name="name"/>
-                <field name="email"/>
-                <field name="phone"/>
-                <field name="mobile"/>
-                <field name="city"/>
-                <filter string="Active" name="active" domain="[('active', '=', True)]"/>
-                <filter string="Inactive" name="inactive" domain="[('active', '=', False)]"/>
+                <field name="name" />
+                <field name="email" />
+                <field name="phone" />
+                <field name="mobile" />
+                <field name="city" />
+                <filter
+                    string="Active"
+                    name="active"
+                    domain="[('active', '=', True)]"
+                />
+                <filter
+                    string="Inactive"
+                    name="inactive"
+                    domain="[('active', '=', False)]"
+                />
                 <group expand="0" string="Group By">
-                    <filter string="City" name="group_city" context="{'group_by': 'city'}"/>
-                    <filter string="Country" name="group_country" context="{'group_by': 'country_id'}"/>
+                    <filter
+                        string="City"
+                        name="group_city"
+                        context="{'group_by': 'city'}"
+                    />
+                    <filter
+                        string="Country"
+                        name="group_country"
+                        context="{'group_by': 'country_id'}"
+                    />
                 </group>
             </search>
         </field>

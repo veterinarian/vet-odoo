@@ -5,7 +5,7 @@
         <field name="name">vet.provider.type.tree</field>
         <field name="model">vet.provider.type</field>
         <field name="arch" type="xml">
-            <tree string="Provider Types" editable="bottom">
+            <tree editable="bottom">
                 <field name="sequence" widget="handle" />
                 <field name="name" />
                 <field name="is_provider" />
