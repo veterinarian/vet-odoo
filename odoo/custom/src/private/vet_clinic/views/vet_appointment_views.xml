@@ -129,6 +129,7 @@
                 color="provider_id"
                 mode="week"
                 event_open_popup="true"
+                quick_create="false"
             >
                 <field name="patient_id" />
                 <field name="owner_id" />

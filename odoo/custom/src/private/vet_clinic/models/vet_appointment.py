@@ -10,7 +10,7 @@ class VetAppointment(models.Model):
 
     name = fields.Char(
         string="Appointment Reference",
-        required=True,
+        required=False,
         copy=False,
         readonly=True,
         default=lambda self: _("New"),
