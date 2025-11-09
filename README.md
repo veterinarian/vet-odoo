@@ -45,7 +45,9 @@ docker-compose -f devel.yaml up
 
 ### Automatic Module Installation
 
-The `init-db.sh` script automatically installs the following modules on a fresh database:
+The `init-db.sh` script automatically installs the following modules on a fresh
+database:
+
 - **account** - Accounting & Invoicing
 - **stock** - Inventory Management
 - **purchase** - Purchase Management
@@ -72,8 +74,10 @@ vet-odoo/
 
 ## Documentation
 
-- **[Development Guide](DEVELOPMENT.md)** - Setup instructions, workflows, and best practices
-- **[Module README](odoo/custom/src/private/vet_clinic/README.md)** - Veterinary clinic module documentation
+- **[Development Guide](DEVELOPMENT.md)** - Setup instructions, workflows, and best
+  practices
+- **[Module README](odoo/custom/src/private/vet_clinic/README.md)** - Veterinary clinic
+  module documentation
 
 ## Doodba Resources
 

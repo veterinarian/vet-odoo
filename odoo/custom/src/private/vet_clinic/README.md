@@ -2,11 +2,13 @@
 
 ## Overview
 
-This module provides comprehensive veterinary clinic management functionality for Odoo 17.
+This module provides comprehensive veterinary clinic management functionality for
+Odoo 17.
 
 ## Features
 
 ### Patient Management
+
 - Comprehensive patient (animal) profiles
 - Multiple species support (dogs, cats, birds, reptiles, etc.)
 - Medical history tracking
@@ -16,12 +18,14 @@ This module provides comprehensive veterinary clinic management functionality fo
 - Age calculation
 
 ### Owner Management
+
 - Pet owner contact information
 - Address management
 - Multiple pets per owner
 - Activity tracking
 
 ### Appointment Management
+
 - Calendar-based appointment scheduling
 - Multiple appointment types (checkup, vaccination, surgery, emergency, follow-up)
 - Appointment workflow (scheduled → confirmed → in progress → done)
@@ -30,10 +34,12 @@ This module provides comprehensive veterinary clinic management functionality fo
 - Prescription management
 
 ### Security
+
 - Two security groups: User and Manager
 - Granular access rights per model
 
 ### Pre-loaded Data
+
 - Common pet species (Dog, Cat, Bird, Rabbit, Horse, etc.)
 - Appointment numbering sequence
 
@@ -87,6 +93,7 @@ This module provides comprehensive veterinary clinic management functionality fo
 ## Testing
 
 Run tests with:
+
 ```bash
 odoo-bin -c config.conf -d test_db --test-enable -i vet_clinic --stop-after-init
 ```

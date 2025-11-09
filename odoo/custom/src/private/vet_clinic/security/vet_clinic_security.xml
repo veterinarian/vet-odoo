@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
     <!-- Security Groups -->
     <record id="module_vet_clinic_category" model="ir.module.category">
@@ -9,23 +9,23 @@
 
     <record id="group_vet_clinic_user" model="res.groups">
         <field name="name">User</field>
-        <field name="category_id" ref="module_vet_clinic_category"/>
-        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        <field name="category_id" ref="module_vet_clinic_category" />
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]" />
     </record>
 
     <record id="group_vet_clinic_manager" model="res.groups">
         <field name="name">Manager</field>
-        <field name="category_id" ref="module_vet_clinic_category"/>
-        <field name="implied_ids" eval="[(4, ref('group_vet_clinic_user'))]"/>
+        <field name="category_id" ref="module_vet_clinic_category" />
+        <field name="implied_ids" eval="[(4, ref('group_vet_clinic_user'))]" />
     </record>
 
     <!-- Automatic group assignment: Odoo Users get vet_clinic User access -->
     <record id="base.group_user" model="res.groups">
-        <field name="implied_ids" eval="[(4, ref('group_vet_clinic_user'))]"/>
+        <field name="implied_ids" eval="[(4, ref('group_vet_clinic_user'))]" />
     </record>
 
     <!-- Automatic group assignment: Odoo Administrators get vet_clinic Manager access -->
     <record id="base.group_system" model="res.groups">
-        <field name="implied_ids" eval="[(4, ref('group_vet_clinic_manager'))]"/>
+        <field name="implied_ids" eval="[(4, ref('group_vet_clinic_manager'))]" />
     </record>
 </odoo>
