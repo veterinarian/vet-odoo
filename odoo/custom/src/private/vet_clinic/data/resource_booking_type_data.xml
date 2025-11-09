@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- Booking Types for Veterinary Appointments -->
+
+    <!-- Regular Checkup -->
+    <record id="booking_type_checkup" model="resource.booking.type">
+        <field name="name">Regular Checkup</field>
+        <field name="duration">0.5</field>
+        <field name="slot_duration">0.5</field>
+        <field name="modifications_deadline">24</field>
+        <field name="combination_assignment">sorted</field>
+        <field
+            name="requester_advice"
+        >Please arrive 10 minutes early for check-in.</field>
+    </record>
+
+    <!-- Vaccination -->
+    <record id="booking_type_vaccination" model="resource.booking.type">
+        <field name="name">Vaccination</field>
+        <field name="duration">0.5</field>
+        <field name="slot_duration">0.5</field>
+        <field name="modifications_deadline">24</field>
+        <field name="combination_assignment">sorted</field>
+        <field
+            name="requester_advice"
+        >Please bring your pet's vaccination records.</field>
+    </record>
+
+    <!-- Surgery -->
+    <record id="booking_type_surgery" model="resource.booking.type">
+        <field name="name">Surgery</field>
+        <field name="duration">2.0</field>
+        <field name="slot_duration">0.5</field>
+        <field name="modifications_deadline">48</field>
+        <field name="combination_assignment">sorted</field>
+        <field
+            name="requester_advice"
+        >Your pet must fast for 12 hours before surgery. Please arrive 30 minutes early.</field>
+    </record>
+
+    <!-- Emergency -->
+    <record id="booking_type_emergency" model="resource.booking.type">
+        <field name="name">Emergency</field>
+        <field name="duration">1.0</field>
+        <field name="slot_duration">0.25</field>
+        <field name="modifications_deadline">0</field>
+        <field name="combination_assignment">random</field>
+        <field
+            name="requester_advice"
+        >Call ahead if possible. We prioritize emergency cases.</field>
+    </record>
+
+    <!-- Follow-up -->
+    <record id="booking_type_followup" model="resource.booking.type">
+        <field name="name">Follow-up</field>
+        <field name="duration">0.5</field>
+        <field name="slot_duration">0.5</field>
+        <field name="modifications_deadline">24</field>
+        <field name="combination_assignment">sorted</field>
+        <field
+            name="requester_advice"
+        >Please bring any medications or test results from the previous visit.</field>
+    </record>
+
+    <!-- Other -->
+    <record id="booking_type_other" model="resource.booking.type">
+        <field name="name">Other</field>
+        <field name="duration">0.5</field>
+        <field name="slot_duration">0.5</field>
+        <field name="modifications_deadline">24</field>
+        <field name="combination_assignment">sorted</field>
+        <field name="requester_advice">Please describe your needs when booking.</field>
+    </record>
+</odoo>

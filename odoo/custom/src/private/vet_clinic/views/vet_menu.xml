@@ -9,7 +9,7 @@
         name="Appointments"
         parent="menu_vet_clinic_root"
         sequence="10"
-        action="action_vet_appointment"
+        action="action_vet_appointments"
     />
 
     <!-- Patients Menu -->

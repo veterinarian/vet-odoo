@@ -4,3 +4,11 @@
 cybro-addons:
   - base_accounting_kit
   - base_account_budget
+
+# OCA Web - Calendar Slot Duration
+web:
+  - web_calendar_slot_duration
+
+# OCA Calendar - Resource Booking
+calendar:
+  - resource_booking
