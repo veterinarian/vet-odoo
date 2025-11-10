@@ -30,3 +30,10 @@
 # Project-specific docker configurations
 /.docker/
 github_token
+
+# Playwright test artifacts
+/test-results/
+/playwright-report/
+/.pytest_cache/
+*.mp4
+*.webm

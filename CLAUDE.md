@@ -82,6 +82,8 @@ docker-compose -f devel.yaml run --rm odoo -i vet_clinic --stop-after-init --wit
 
 ### Testing
 
+#### Unit/Integration Tests (Odoo)
+
 ```bash
 # Run all tests
 docker-compose -f test.yaml run --rm odoo
@@ -92,6 +94,46 @@ docker-compose -f devel.yaml run --rm odoo test --test-tags /vet_clinic
 # Run tests for single test file (local pytest)
 pytest odoo/custom/src/private/vet_clinic/tests/test_vet_patient.py
 ```
+
+#### UI Tests (Playwright)
+
+```bash
+# Install Playwright browsers (first time only)
+docker-compose -f devel.yaml run --rm odoo bash
+playwright install chromium
+
+# Run all UI tests
+pytest tests/ui/
+
+# Run specific test file
+pytest tests/ui/test_patient_management.py
+
+# Run with specific browser
+pytest tests/ui/ --browser=chromium
+pytest tests/ui/ --browser=firefox
+
+# Run in headed mode (see browser)
+pytest tests/ui/ --headed --slowmo=1000
+
+# Run tests by marker
+pytest tests/ui/ -m smoke          # Quick smoke tests
+pytest tests/ui/ -m patient        # Patient tests only
+pytest tests/ui/ -m appointment    # Appointment tests only
+pytest tests/ui/ -m e2e            # End-to-end tests
+pytest tests/ui/ -m "not slow"     # Exclude slow tests
+
+# Debug mode with Playwright Inspector
+pytest tests/ui/ --headed --slowmo=1000 -x
+
+# With video recording
+pytest tests/ui/ --video=on
+
+# With screenshots on failure
+pytest tests/ui/ --screenshot=only-on-failure
+```
+
+**Note**: UI tests require Odoo to be running. Start with
+`docker-compose -f devel.yaml up` first.
 
 ### Code Quality
 
@@ -173,8 +215,11 @@ docker-compose -f devel.yaml build --no-cache
 ## File Locations
 
 - **Custom module**: `odoo/custom/src/private/vet_clinic/`
+- **Unit tests**: `odoo/custom/src/private/vet_clinic/tests/`
+- **UI tests**: `tests/ui/` (Playwright tests)
 - **Dependencies**: `odoo/custom/dependencies/pip.txt` (primary for Docker)
 - **Docker configs**: `devel.yaml`, `test.yaml`, `prod.yaml`, `common.yaml`
+- **Pytest config**: `pytest.ini`
 - **Invoke tasks**: `tasks.py` (run with `invoke --list`)
 - **Pre-commit config**: `.pre-commit-config.yaml`
 - **Linter configs**: `.pylintrc`, `.pylintrc-mandatory`, `.ruff.toml`, `.eslintrc.yml`
