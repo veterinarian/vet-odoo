@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+    <t t-name="vet_clinic.MedicalTimelineRenderer" owl="1">
+        <div class="o_medical_timeline">
+            <div class="o_medical_timeline_container">
+                <t t-if="state.records.length === 0">
+                    <div class="o_medical_timeline_empty">
+                        <p>No medical notes found.</p>
+                    </div>
+                </t>
+                <t t-else="">
+                    <t t-foreach="state.records" t-as="record" t-key="record.id">
+                        <div
+                            class="o_medical_timeline_entry"
+                            t-att-class="{
+                                'o_important': record.is_important,
+                                'o_private': record.is_private,
+                                'o_expanded': this.isExpanded(record.id)
+                            }"
+                        >
+                            <div class="o_timeline_dot">
+                                <i
+                                    t-if="record.note_type === 'soap'"
+                                    class="fa fa-stethoscope"
+                                />
+                                <i
+                                    t-elif="record.note_type === 'communication'"
+                                    class="fa fa-comments"
+                                />
+                                <i
+                                    t-elif="record.note_type === 'result'"
+                                    class="fa fa-flask"
+                                />
+                                <i
+                                    t-elif="record.note_type === 'image'"
+                                    class="fa fa-image"
+                                />
+                                <i
+                                    t-elif="record.note_type === 'report'"
+                                    class="fa fa-file-text"
+                                />
+                                <i t-else="" class="fa fa-sticky-note" />
+                            </div>
+
+                            <div class="o_timeline_content">
+                                <div
+                                    class="o_timeline_header"
+                                    t-att-data-record-id="record.id"
+                                    t-on-click.stop="onHeaderClick"
+                                >
+                                    <div class="o_timeline_header_main">
+                                        <span class="o_timeline_date">
+                                            <i class="fa fa-clock-o" />
+                                            <t
+                                                t-esc="this.formatDateTime(record.date)"
+                                            />
+                                        </span>
+                                        <span class="o_timeline_type">
+                                            <t
+                                                t-esc="this.getNoteTypeLabel(record.note_type)"
+                                            />
+                                        </span>
+                                        <t t-if="record.is_important">
+                                            <span
+                                                class="o_timeline_badge o_badge_important"
+                                            >
+                                                <i class="fa fa-star" /> Important
+                                            </span>
+                                        </t>
+                                        <t t-if="record.is_private">
+                                            <span
+                                                class="o_timeline_badge o_badge_private"
+                                            >
+                                                <i class="fa fa-lock" /> Private
+                                            </span>
+                                        </t>
+                                    </div>
+                                    <div class="o_timeline_header_meta">
+                                        <span class="o_timeline_patient">
+                                            <i class="fa fa-paw" />
+                                            <t
+                                                t-esc="this.getDisplayName(record.patient_id)"
+                                            />
+                                        </span>
+                                        <t t-if="record.owner_id">
+                                            <span class="o_timeline_owner">
+                                                <i class="fa fa-user" />
+                                                <t
+                                                    t-esc="this.getDisplayName(record.owner_id)"
+                                                />
+                                            </span>
+                                        </t>
+                                        <span class="o_timeline_author">
+                                            <i class="fa fa-user-md" />
+                                            <t
+                                                t-esc="this.getDisplayName(record.author_id)"
+                                            />
+                                        </span>
+                                        <t t-if="record.attachment_count > 0">
+                                            <span class="o_timeline_attachments">
+                                                <i class="fa fa-paperclip" />
+                                                <t t-esc="record.attachment_count" />
+                                            </span>
+                                        </t>
+                                    </div>
+                                    <div class="o_timeline_expand_icon">
+                                        <i
+                                            t-if="this.isExpanded(record.id)"
+                                            class="fa fa-chevron-up"
+                                        />
+                                        <i t-else="" class="fa fa-chevron-down" />
+                                    </div>
+                                </div>
+
+                                <t t-if="this.isExpanded(record.id)">
+                                    <div class="o_timeline_body">
+                                        <t t-if="record.note_type === 'soap'">
+                                            <div class="o_soap_section">
+                                                <t t-if="record.subjective">
+                                                    <div class="o_soap_item">
+                                                        <strong>Subjective:</strong>
+                                                        <div
+                                                            class="o_soap_content"
+                                                            t-esc="record.subjective"
+                                                        />
+                                                    </div>
+                                                </t>
+                                                <t t-if="record.objective">
+                                                    <div class="o_soap_item">
+                                                        <strong>Objective:</strong>
+                                                        <div
+                                                            class="o_soap_content"
+                                                            t-esc="record.objective"
+                                                        />
+                                                    </div>
+                                                </t>
+                                                <t t-if="record.assessment">
+                                                    <div class="o_soap_item">
+                                                        <strong>Assessment:</strong>
+                                                        <div
+                                                            class="o_soap_content"
+                                                            t-esc="record.assessment"
+                                                        />
+                                                    </div>
+                                                </t>
+                                                <t t-if="record.plan">
+                                                    <div class="o_soap_item">
+                                                        <strong>Plan:</strong>
+                                                        <div
+                                                            class="o_soap_content"
+                                                            t-esc="record.plan"
+                                                        />
+                                                    </div>
+                                                </t>
+                                            </div>
+                                        </t>
+
+                                        <t t-else="">
+                                            <div
+                                                class="o_note_content"
+                                                t-out="record.content"
+                                            />
+                                        </t>
+
+                                        <div class="o_timeline_actions">
+                                            <button
+                                                class="btn btn-sm btn-primary"
+                                                t-att-data-record-id="record.id"
+                                                t-on-click.stop="onOpenRecord"
+                                            >
+                                                <i class="fa fa-edit" /> Open Full Note
+                                            </button>
+                                        </div>
+                                    </div>
+                                </t>
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </div>
+        </div>
+    </t>
+</templates>

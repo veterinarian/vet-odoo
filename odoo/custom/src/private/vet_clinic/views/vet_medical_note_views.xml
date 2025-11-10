@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- Medical Note Form View -->
+    <record id="view_vet_medical_note_form" model="ir.ui.view">
+        <field name="name">vet.medical.note.form</field>
+        <field name="model">vet.medical.note</field>
+        <field name="arch" type="xml">
+            <form string="Medical Note">
+                <header>
+                    <field name="note_type" widget="statusbar" />
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button
+                            name="action_view_attachments"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-paperclip"
+                            invisible="attachment_count == 0"
+                        >
+                            <field name="attachment_count" widget="statbutton" />
+                        </button>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="patient_id" />
+                            <field name="booking_id" />
+                            <field name="date" />
+                        </group>
+                        <group>
+                            <field name="author_id" />
+                            <field name="is_private" />
+                            <field name="is_important" />
+                        </group>
+                    </group>
+
+                    <!-- SOAP Note Fields -->
+                    <notebook>
+                        <page
+                            string="SOAP Note"
+                            name="soap"
+                            invisible="note_type != 'soap'"
+                        >
+                            <separator string="Subjective" />
+                            <field
+                                name="subjective"
+                                placeholder="What the owner reports (complaints, observations, history)"
+                                nolabel="1"
+                            />
+                            <separator string="Objective" />
+                            <field
+                                name="objective"
+                                placeholder="Observable findings from examination (vitals, physical exam, labs)"
+                                nolabel="1"
+                            />
+                            <separator string="Assessment" />
+                            <field
+                                name="assessment"
+                                placeholder="Diagnosis or differential diagnoses"
+                                nolabel="1"
+                            />
+                            <separator string="Plan" />
+                            <field
+                                name="plan"
+                                placeholder="Treatment plan, medications, follow-up, home care instructions"
+                                nolabel="1"
+                            />
+                        </page>
+
+                        <!-- General Content for non-SOAP notes -->
+                        <page
+                            string="Content"
+                            name="content"
+                            invisible="note_type == 'soap'"
+                        >
+                            <field name="content" nolabel="1" />
+                        </page>
+
+                        <!-- Attachments -->
+                        <page string="Attachments" name="attachments">
+                            <field name="attachment_ids" widget="many2many_binary" />
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" />
+                    <field name="activity_ids" />
+                    <field name="message_ids" />
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Medical Note Tree View -->
+    <record id="view_vet_medical_note_tree" model="ir.ui.view">
+        <field name="name">vet.medical.note.tree</field>
+        <field name="model">vet.medical.note</field>
+        <field name="arch" type="xml">
+            <tree decoration-info="is_important == True">
+                <field name="date" />
+                <field name="patient_id" />
+                <field name="note_type" />
+                <field name="author_id" />
+                <field name="booking_id" optional="hide" />
+                <field name="is_private" optional="hide" />
+                <field name="is_important" optional="hide" />
+                <field name="attachment_count" optional="show" />
+            </tree>
+        </field>
+    </record>
+
+    <!-- Medical Note Search View -->
+    <record id="view_vet_medical_note_search" model="ir.ui.view">
+        <field name="name">vet.medical.note.search</field>
+        <field name="model">vet.medical.note</field>
+        <field name="arch" type="xml">
+            <search string="Medical Notes">
+                <field name="patient_id" />
+                <field name="author_id" />
+                <field name="note_type" />
+                <filter
+                    string="SOAP Notes"
+                    name="filter_soap"
+                    domain="[('note_type', '=', 'soap')]"
+                />
+                <filter
+                    string="Important"
+                    name="filter_important"
+                    domain="[('is_important', '=', True)]"
+                />
+                <filter
+                    string="Private"
+                    name="filter_private"
+                    domain="[('is_private', '=', True)]"
+                />
+                <separator />
+                <filter
+                    string="This Week"
+                    name="filter_this_week"
+                    domain="[('date', '&gt;=', (context_today() - datetime.timedelta(days=7)).strftime('%Y-%m-%d'))]"
+                />
+                <filter
+                    string="This Month"
+                    name="filter_this_month"
+                    domain="[('date', '&gt;=', (context_today() - datetime.timedelta(days=30)).strftime('%Y-%m-%d'))]"
+                />
+                <group expand="0" string="Group By">
+                    <filter
+                        string="Patient"
+                        name="group_patient"
+                        context="{'group_by': 'patient_id'}"
+                    />
+                    <filter
+                        string="Note Type"
+                        name="group_type"
+                        context="{'group_by': 'note_type'}"
+                    />
+                    <filter
+                        string="Author"
+                        name="group_author"
+                        context="{'group_by': 'author_id'}"
+                    />
+                    <filter
+                        string="Date"
+                        name="group_date"
+                        context="{'group_by': 'date'}"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Medical Note Action -->
+    <record id="action_vet_medical_note" model="ir.actions.act_window">
+        <field name="name">Medical Notes</field>
+        <field name="res_model">vet.medical.note</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{'search_default_filter_this_month': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first medical note!
+            </p>
+            <p>
+                Document patient visits with SOAP notes, diagnostic results, images, and more.
+            </p>
+        </field>
+    </record>
+</odoo>

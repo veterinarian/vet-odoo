@@ -32,6 +32,50 @@
                 </header>
                 <sheet>
                     <field name="image" widget="image" class="oe_avatar" />
+                    <div class="oe_button_box" name="button_box">
+                        <button
+                            name="%(action_vet_medical_note)d"
+                            type="action"
+                            class="oe_stat_button"
+                            icon="fa-stethoscope"
+                            context="{'default_patient_id': active_id, 'search_default_patient_id': active_id}"
+                        >
+                            <field
+                                name="medical_note_count"
+                                widget="statbutton"
+                                string="Notes"
+                            />
+                        </button>
+                        <button
+                            name="%(action_vet_problem)d"
+                            type="action"
+                            class="oe_stat_button"
+                            icon="fa-heartbeat"
+                            context="{'default_patient_id': active_id, 'search_default_patient_id': active_id, 'search_default_filter_active': 1}"
+                        >
+                            <div class="o_field_widget o_stat_info">
+                                <span class="o_stat_value">
+                                    <field name="active_problem_count" /> / <field
+                                        name="problem_count"
+                                    />
+                                </span>
+                                <span class="o_stat_text">Problems</span>
+                            </div>
+                        </button>
+                        <button
+                            name="%(action_vet_appointment)d"
+                            type="action"
+                            class="oe_stat_button"
+                            icon="fa-calendar"
+                            context="{'default_patient_id': active_id, 'search_default_patient_id': active_id}"
+                        >
+                            <field
+                                name="appointment_count"
+                                widget="statbutton"
+                                string="Appointments"
+                            />
+                        </button>
+                    </div>
                     <div class="oe_title">
                         <h1>
                             <field name="name" placeholder="Patient Name" />
@@ -163,6 +207,44 @@
                                     <field name="appointment_type" />
                                     <field name="veterinarian_id" />
                                     <field name="state" />
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Medical Record" name="medical_record">
+                            <group>
+                                <button
+                                    name="%(action_vet_medical_note)d"
+                                    type="action"
+                                    string="New Note"
+                                    class="btn-primary"
+                                    context="{'default_patient_id': active_id, 'default_note_type': 'soap'}"
+                                />
+                            </group>
+                            <field
+                                name="medical_note_ids"
+                                widget="medical_timeline"
+                                nolabel="1"
+                            />
+                        </page>
+                        <page string="Problem List" name="problem_list">
+                            <group>
+                                <button
+                                    name="%(action_vet_problem)d"
+                                    type="action"
+                                    string="Add Problem"
+                                    class="btn-primary"
+                                    context="{'default_patient_id': active_id, 'default_status': 'active'}"
+                                />
+                            </group>
+                            <field name="problem_ids">
+                                <tree
+                                    decoration-success="status == 'resolved'"
+                                    decoration-warning="status == 'active'"
+                                >
+                                    <field name="status" />
+                                    <field name="name" />
+                                    <field name="onset_date" />
+                                    <field name="resolved_date" optional="hide" />
                                 </tree>
                             </field>
                         </page>

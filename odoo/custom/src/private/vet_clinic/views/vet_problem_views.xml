@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- Problem List Form View -->
+    <record id="view_vet_problem_form" model="ir.ui.view">
+        <field name="name">vet.problem.form</field>
+        <field name="model">vet.problem</field>
+        <field name="arch" type="xml">
+            <form string="Problem">
+                <header>
+                    <button
+                        name="action_mark_resolved"
+                        string="Mark Resolved"
+                        type="object"
+                        class="oe_highlight"
+                        invisible="status == 'resolved'"
+                    />
+                    <button
+                        name="action_mark_active"
+                        string="Reactivate"
+                        type="object"
+                        class="oe_highlight"
+                        invisible="status == 'active'"
+                    />
+                    <field name="status" widget="statusbar" />
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name" />
+                            <field name="patient_id" />
+                            <field name="diagnosis_code" />
+                        </group>
+                        <group>
+                            <field name="onset_date" />
+                            <field
+                                name="resolved_date"
+                                invisible="status == 'active'"
+                            />
+                        </group>
+                    </group>
+                    <group>
+                        <field
+                            name="notes"
+                            placeholder="Additional notes about this problem..."
+                        />
+                    </group>
+                    <notebook>
+                        <page string="Related Medical Notes" name="related_notes">
+                            <field name="medical_note_ids" />
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" />
+                    <field name="activity_ids" />
+                    <field name="message_ids" />
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Problem List Tree View -->
+    <record id="view_vet_problem_tree" model="ir.ui.view">
+        <field name="name">vet.problem.tree</field>
+        <field name="model">vet.problem</field>
+        <field name="arch" type="xml">
+            <tree
+                decoration-success="status == 'resolved'"
+                decoration-warning="status == 'active'"
+            >
+                <field name="status" />
+                <field name="name" />
+                <field name="patient_id" />
+                <field name="onset_date" />
+                <field name="resolved_date" optional="hide" />
+                <field name="diagnosis_code" optional="hide" />
+            </tree>
+        </field>
+    </record>
+
+    <!-- Problem List Search View -->
+    <record id="view_vet_problem_search" model="ir.ui.view">
+        <field name="name">vet.problem.search</field>
+        <field name="model">vet.problem</field>
+        <field name="arch" type="xml">
+            <search string="Problems">
+                <field name="name" />
+                <field name="patient_id" />
+                <field name="diagnosis_code" />
+                <filter
+                    string="Active"
+                    name="filter_active"
+                    domain="[('status', '=', 'active')]"
+                />
+                <filter
+                    string="Resolved"
+                    name="filter_resolved"
+                    domain="[('status', '=', 'resolved')]"
+                />
+                <group expand="0" string="Group By">
+                    <filter
+                        string="Patient"
+                        name="group_patient"
+                        context="{'group_by': 'patient_id'}"
+                    />
+                    <filter
+                        string="Status"
+                        name="group_status"
+                        context="{'group_by': 'status'}"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Problem List Action -->
+    <record id="action_vet_problem" model="ir.actions.act_window">
+        <field name="name">Problem List</field>
+        <field name="res_model">vet.problem</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{'search_default_filter_active': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Start tracking patient problems!
+            </p>
+            <p>
+                Maintain a master problem list for each patient to track active and resolved health issues.
+            </p>
+        </field>
+    </record>
+</odoo>

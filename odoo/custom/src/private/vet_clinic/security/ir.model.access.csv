@@ -11,3 +11,7 @@ access_vet_patient_user,vet.patient.user,model_vet_patient,group_vet_clinic_user
 access_vet_patient_manager,vet.patient.manager,model_vet_patient,group_vet_clinic_manager,1,1,1,1
 access_vet_appointment_user,vet.appointment.user,model_vet_appointment,group_vet_clinic_user,1,1,1,0
 access_vet_appointment_manager,vet.appointment.manager,model_vet_appointment,group_vet_clinic_manager,1,1,1,1
+access_vet_medical_note_user,vet.medical.note.user,model_vet_medical_note,group_vet_clinic_user,1,1,1,0
+access_vet_medical_note_manager,vet.medical.note.manager,model_vet_medical_note,group_vet_clinic_manager,1,1,1,1
+access_vet_problem_user,vet.problem.user,model_vet_problem,group_vet_clinic_user,1,1,1,0
+access_vet_problem_manager,vet.problem.manager,model_vet_problem,group_vet_clinic_manager,1,1,1,1

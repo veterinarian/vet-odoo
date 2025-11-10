@@ -30,6 +30,24 @@
         action="action_vet_owner"
     />
 
+    <!-- Medical Notes Menu -->
+    <menuitem
+        id="menu_vet_medical_notes"
+        name="Medical Notes"
+        parent="menu_vet_clinic_root"
+        sequence="40"
+        action="action_vet_medical_note"
+    />
+
+    <!-- Problem List Menu -->
+    <menuitem
+        id="menu_vet_problems"
+        name="Problem List"
+        parent="menu_vet_clinic_root"
+        sequence="50"
+        action="action_vet_problem"
+    />
+
     <!-- Configuration Menu -->
     <menuitem
         id="menu_vet_config"

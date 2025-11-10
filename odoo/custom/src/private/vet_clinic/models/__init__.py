@@ -6,3 +6,5 @@ from . import vet_room
 from . import res_users
 from . import resource_booking
 from . import vet_appointment
+from . import vet_medical_note
+from . import vet_problem

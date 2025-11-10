@@ -80,7 +80,18 @@ class VetPatient(models.Model):
     )
 
     allergies = fields.Text(string="Known Allergies")
-    medical_notes = fields.Text()
+    medical_notes = fields.Text()  # Deprecated - use medical_note_ids instead
+
+    # Medical notes and problem list
+    medical_note_ids = fields.One2many(
+        "vet.medical.note", "patient_id", string="Medical Notes"
+    )
+    medical_note_count = fields.Integer(compute="_compute_medical_note_count")
+    problem_ids = fields.One2many("vet.problem", "patient_id", string="Problems")
+    problem_count = fields.Integer(compute="_compute_problem_count")
+    active_problem_count = fields.Integer(
+        compute="_compute_problem_count", string="Active Problems"
+    )
 
     image = fields.Binary(string="Photo", attachment=True)
 
@@ -182,3 +193,16 @@ class VetPatient(models.Model):
     def _compute_appointment_count(self):
         for patient in self:
             patient.appointment_count = len(patient.appointment_ids)
+
+    @api.depends("medical_note_ids")
+    def _compute_medical_note_count(self):
+        for patient in self:
+            patient.medical_note_count = len(patient.medical_note_ids)
+
+    @api.depends("problem_ids", "problem_ids.status")
+    def _compute_problem_count(self):
+        for patient in self:
+            patient.problem_count = len(patient.problem_ids)
+            patient.active_problem_count = len(
+                patient.problem_ids.filtered(lambda p: p.status == "active")
+            )

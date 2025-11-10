@@ -1,0 +1,258 @@
+/* Medical Timeline Styles */
+
+.o_medical_timeline {
+    padding: 20px;
+    background-color: #f8f9fa;
+    min-height: 400px;
+}
+
+.o_medical_timeline_container {
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+}
+
+/* Vertical timeline line */
+.o_medical_timeline_container::before {
+    content: "";
+    position: absolute;
+    left: 30px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: #dee2e6;
+}
+
+/* Timeline Entry */
+.o_medical_timeline_entry {
+    position: relative;
+    margin-bottom: 30px;
+    padding-left: 70px;
+}
+
+.o_medical_timeline_entry.o_important .o_timeline_content {
+    border-left: 4px solid #ffc107;
+}
+
+.o_medical_timeline_entry.o_private .o_timeline_content {
+    background-color: #fff3cd;
+}
+
+/* Timeline Dot */
+.o_timeline_dot {
+    position: absolute;
+    left: 18px;
+    top: 0;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: white;
+    border: 3px solid #007bff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+}
+
+.o_timeline_dot i {
+    color: #007bff;
+    font-size: 12px;
+}
+
+.o_medical_timeline_entry.o_important .o_timeline_dot {
+    border-color: #ffc107;
+}
+
+.o_medical_timeline_entry.o_important .o_timeline_dot i {
+    color: #ffc107;
+}
+
+/* Timeline Content */
+.o_timeline_content {
+    background: white;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: box-shadow 0.3s;
+}
+
+.o_timeline_content:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Timeline Header */
+.o_timeline_header {
+    padding: 15px 20px;
+    background: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+    cursor: pointer;
+    user-select: none;
+    position: relative;
+}
+
+.o_timeline_header:hover {
+    background: #e9ecef;
+}
+
+.o_timeline_header_main {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+}
+
+.o_timeline_date {
+    font-weight: 600;
+    color: #495057;
+    font-size: 14px;
+}
+
+.o_timeline_date i {
+    color: #6c757d;
+    margin-right: 5px;
+}
+
+.o_timeline_type {
+    background: #007bff;
+    color: white;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.o_timeline_badge {
+    padding: 3px 8px;
+    border-radius: 10px;
+    font-size: 11px;
+    font-weight: 500;
+}
+
+.o_badge_important {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.o_badge_private {
+    background: #d1ecf1;
+    color: #0c5460;
+}
+
+.o_timeline_header_meta {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    font-size: 13px;
+    color: #6c757d;
+    flex-wrap: wrap;
+}
+
+.o_timeline_header_meta span {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.o_timeline_header_meta i {
+    color: #adb5bd;
+}
+
+.o_timeline_expand_icon {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #6c757d;
+    font-size: 14px;
+}
+
+/* Timeline Body */
+.o_timeline_body {
+    padding: 20px;
+    animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        max-height: 0;
+    }
+    to {
+        opacity: 1;
+        max-height: 2000px;
+    }
+}
+
+/* SOAP Note Sections */
+.o_soap_section {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.o_soap_item {
+    padding: 12px;
+    background: #f8f9fa;
+    border-left: 3px solid #007bff;
+    border-radius: 4px;
+}
+
+.o_soap_item strong {
+    display: block;
+    color: #007bff;
+    margin-bottom: 8px;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.o_soap_content {
+    color: #495057;
+    line-height: 1.6;
+    white-space: pre-wrap;
+}
+
+/* Other note content */
+.o_note_content {
+    color: #495057;
+    line-height: 1.6;
+}
+
+/* Timeline Actions */
+.o_timeline_actions {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #dee2e6;
+}
+
+/* Empty state */
+.o_medical_timeline_empty {
+    text-align: center;
+    padding: 60px 20px;
+    color: #6c757d;
+}
+
+.o_medical_timeline_empty p {
+    font-size: 16px;
+    margin: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .o_medical_timeline_entry {
+        padding-left: 50px;
+    }
+
+    .o_timeline_header_main,
+    .o_timeline_header_meta {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    .o_timeline_body {
+        padding: 15px;
+    }
+}

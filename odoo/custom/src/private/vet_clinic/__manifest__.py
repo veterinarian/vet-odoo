@@ -28,9 +28,18 @@
         "views/vet_owner_views.xml",
         "views/resource_booking_views.xml",
         "views/vet_appointment_views.xml",
+        "views/vet_medical_note_views.xml",
+        "views/vet_problem_views.xml",
         "views/vet_patient_views.xml",
         "views/vet_menu.xml",
     ],
+    "assets": {
+        "web.assets_backend": [
+            "vet_clinic/static/src/js/medical_timeline.js",
+            "vet_clinic/static/src/xml/medical_timeline.xml",
+            "vet_clinic/static/src/css/medical_timeline.css",
+        ],
+    },
     "demo": [],
     "installable": True,
     "application": True,
