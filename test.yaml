@@ -42,7 +42,7 @@ services:
     networks:
       default:
         aliases:
-            - "Vet Odoo-17-0-test-db"
+          - "Vet Odoo-17-0-test-db"
     restart: unless-stopped
 
   smtp:

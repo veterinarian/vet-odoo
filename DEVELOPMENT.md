@@ -7,11 +7,13 @@ This project has multiple requirements files for different purposes:
 ### 📦 Dependency Files
 
 1. **`odoo/custom/dependencies/pip.txt`** (Recommended for Doodba/Docker)
+
    - Used by Doodba Docker builds
    - Automatically installed in Docker containers
    - **This is the primary file for Docker-based development**
 
 2. **`requirements.txt`** (Reference/Local Development)
+
    - Complete list of Odoo 17 core dependencies
    - Use for local virtual environment setup
    - Reference for understanding all project dependencies
@@ -35,6 +37,7 @@ docker-compose -f devel.yaml up
 ```
 
 To add a new dependency:
+
 1. Edit `odoo/custom/dependencies/pip.txt`
 2. Rebuild the container:
    ```bash
@@ -119,6 +122,7 @@ pylint odoo/custom/src/private/vet_clinic
 ### For Docker/Production
 
 Add to `odoo/custom/dependencies/pip.txt`:
+
 ```txt
 # Example
 pandas>=2.0.0
@@ -126,6 +130,7 @@ numpy>=1.24.0
 ```
 
 Then rebuild:
+
 ```bash
 docker-compose -f devel.yaml build --no-cache
 ```
@@ -133,6 +138,7 @@ docker-compose -f devel.yaml build --no-cache
 ### For Local Development Only
 
 Add to `requirements-dev.txt`:
+
 ```txt
 # Example
 pytest-mock>=3.11.0
@@ -215,6 +221,7 @@ odoo-bin shell -c config.conf -d dev_db
 ### Debugger
 
 Add to your Python code:
+
 ```python
 import ipdb; ipdb.set_trace()
 ```

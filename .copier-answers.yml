@@ -1,11 +1,11 @@
 # Changes here will be overwritten by Copier; NEVER EDIT MANUALLY
 _commit: v9.0.3
 _src_path: gh:Tecnativa/doodba-copier-template
-backup_dst: ''
+backup_dst: ""
 cidr_whitelist: []
 domains_prod: {}
 domains_test: {}
-gitlab_url: ''
+gitlab_url: ""
 odoo_dbfilter: ^prod
 odoo_initial_lang: en_US
 odoo_listdb: true
@@ -14,18 +14,17 @@ odoo_oci_image: ghcr.io/tecnativa/odoo-base
 odoo_proxy: traefik
 odoo_version: 17.0
 paths_with_crawlers:
-- /web/image/website
+  - /web/image/website
 paths_without_crawlers:
-- /web
-- /website/info
+  - /web
+  - /website/info
 postgres_dbname: prod
 postgres_exposed: false
 postgres_username: odoo
-postgres_version: '15'
+postgres_version: "15"
 project_author: veterinarian
 project_license: AGPL-3.0-or-later
 project_name: Vet Odoo
-smtp_default_from: ''
-smtp_relay_host: ''
+smtp_default_from: ""
+smtp_relay_host: ""
 traefik_version: 2
-

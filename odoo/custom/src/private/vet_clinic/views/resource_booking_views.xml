@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- Extended Resource Booking Form View -->
+    <record id="view_resource_booking_form_vet" model="ir.ui.view">
+        <field name="name">resource.booking.form.vet</field>
+        <field name="model">resource.booking</field>
+        <field name="inherit_id" ref="resource_booking.resource_booking_view_form" />
+        <field name="arch" type="xml">
+            <!-- Add patient before partner_ids -->
+            <field name="partner_ids" position="before">
+                <field name="patient_id" required="1" />
+                <field name="owner_id" />
+            </field>
+
+            <!-- Hide attendees field (auto-populated from patient/provider) -->
+            <field name="partner_ids" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+
+            <!-- Hide name field (auto-generated from patient/type/date) -->
+            <field name="name" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+
+            <!-- Add room and provider after categ_ids -->
+            <field name="categ_ids" position="after">
+                <field name="room_id" required="1" />
+                <field name="provider_id" required="1" />
+            </field>
+
+            <!-- Disable auto-assign by default for vet workflow -->
+            <field name="combination_auto_assign" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <label for="combination_auto_assign" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </label>
+            <field name="combination_id" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+
+            <!-- Add vet-specific fields after description -->
+            <field name="description" position="after">
+                <notebook>
+                    <page string="Reason for Visit" name="reason">
+                        <field name="reason" placeholder="Reason for visit..." />
+                    </page>
+                    <page string="Diagnosis &amp; Treatment" name="diagnosis">
+                        <group>
+                            <field name="diagnosis" placeholder="Diagnosis..." />
+                            <field name="treatment" placeholder="Treatment plan..." />
+                            <field
+                                name="prescription"
+                                placeholder="Prescription details..."
+                            />
+                        </group>
+                    </page>
+                    <page string="Notes" name="notes">
+                        <field name="notes" placeholder="Additional notes..." />
+                    </page>
+                </notebook>
+            </field>
+        </field>
+    </record>
+
+    <!-- Extended Resource Booking Tree View -->
+    <record id="view_resource_booking_tree_vet" model="ir.ui.view">
+        <field name="name">resource.booking.tree.vet</field>
+        <field name="model">resource.booking</field>
+        <field name="inherit_id" ref="resource_booking.resource_booking_view_tree" />
+        <field name="arch" type="xml">
+            <!-- Add patient column after partner -->
+            <field name="partner_ids" position="after">
+                <field name="patient_id" />
+                <field name="room_id" optional="show" />
+                <field name="provider_id" optional="show" />
+            </field>
+        </field>
+    </record>
+
+    <!-- Extended Resource Booking Calendar View -->
+    <record id="view_resource_booking_calendar_vet" model="ir.ui.view">
+        <field name="name">resource.booking.calendar.vet</field>
+        <field name="model">resource.booking</field>
+        <field
+            name="inherit_id"
+            ref="resource_booking.resource_booking_view_calendar"
+        />
+        <field name="arch" type="xml">
+            <field name="partner_ids" position="after">
+                <field name="patient_id" />
+                <field name="owner_id" />
+                <field name="room_id" />
+                <field name="provider_id" />
+            </field>
+        </field>
+    </record>
+
+    <!-- Extended Resource Booking Search View -->
+    <record id="view_resource_booking_search_vet" model="ir.ui.view">
+        <field name="name">resource.booking.search.vet</field>
+        <field name="model">resource.booking</field>
+        <field name="inherit_id" ref="resource_booking.resource_booking_view_search" />
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="patient_id" />
+                <field name="owner_id" />
+                <field name="room_id" />
+                <field name="provider_id" />
+            </field>
+
+            <!-- Add group by -->
+            <xpath expr="//search/group[@name='groupby']" position="inside">
+                <filter
+                    string="Patient"
+                    name="group_patient"
+                    context="{'group_by': 'patient_id'}"
+                />
+                <filter
+                    string="Room"
+                    name="group_room"
+                    context="{'group_by': 'room_id'}"
+                />
+                <filter
+                    string="Provider"
+                    name="group_provider"
+                    context="{'group_by': 'provider_id'}"
+                />
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Appointments Menu Action -->
+    <record id="action_vet_appointments" model="ir.actions.act_window">
+        <field name="name">Appointments</field>
+        <field name="res_model">resource.booking</field>
+        <field name="view_mode">calendar,tree,form</field>
+        <field name="context">{'search_default_today': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Schedule your first appointment!
+            </p>
+            <p>
+                Manage appointments for your veterinary clinic with automatic conflict detection.
+            </p>
+        </field>
+    </record>
+</odoo>

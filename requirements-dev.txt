@@ -8,6 +8,8 @@ pytest-odoo>=0.6.0
 pytest-xdist>=3.3.0  # Parallel test execution
 coverage>=7.3.0
 faker>=19.0.0  # Generate fake data for testing
+playwright>=1.40.0  # UI testing
+pytest-playwright>=0.4.0  # Playwright pytest plugin
 
 # Code Quality and Linting
 pylint>=3.0.0
