@@ -31,7 +31,10 @@
         "views/vet_patient_views.xml",
         "views/vet_menu.xml",
     ],
-    "demo": [],
+    "demo": [
+        "demo/res_partner_demo.xml",
+        "demo/vet_patient_demo.xml",
+    ],
     "installable": True,
     "application": True,
     "auto_install": False,

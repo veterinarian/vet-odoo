@@ -22,8 +22,7 @@ docker-compose -f devel.yaml down
 echo "Initializing database (this may take a few minutes)..."
 docker-compose -f devel.yaml run --rm odoo \
     --stop-after-init \
-    -i "$MODULES" \
-    --without-demo=all
+    -i "$MODULES"
 
 echo ""
 echo "✓ Database initialized successfully!"

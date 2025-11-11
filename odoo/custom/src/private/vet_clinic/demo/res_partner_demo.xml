@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- Demo Pet Owners -->
+    <record id="demo_owner_smith" model="vet.owner">
+        <field name="name">John Smith</field>
+        <field name="email">john.smith@example.com</field>
+        <field name="phone">555-0101</field>
+        <field name="mobile">555-1001</field>
+        <field name="street">123 Main Street</field>
+        <field name="city">Springfield</field>
+        <field name="zip">12345</field>
+    </record>
+
+    <record id="demo_owner_johnson" model="vet.owner">
+        <field name="name">Emily Johnson</field>
+        <field name="email">emily.johnson@example.com</field>
+        <field name="phone">555-0102</field>
+        <field name="mobile">555-1002</field>
+        <field name="street">456 Oak Avenue</field>
+        <field name="city">Springfield</field>
+        <field name="zip">12345</field>
+    </record>
+
+    <record id="demo_owner_williams" model="vet.owner">
+        <field name="name">Michael Williams</field>
+        <field name="email">michael.williams@example.com</field>
+        <field name="phone">555-0103</field>
+        <field name="street">789 Elm Street</field>
+        <field name="city">Springfield</field>
+        <field name="zip">12345</field>
+    </record>
+
+    <record id="demo_owner_brown" model="vet.owner">
+        <field name="name">Sarah Brown</field>
+        <field name="email">sarah.brown@example.com</field>
+        <field name="phone">555-0104</field>
+        <field name="mobile">555-1004</field>
+        <field name="street">321 Pine Road</field>
+        <field name="city">Springfield</field>
+        <field name="zip">12346</field>
+    </record>
+
+    <record id="demo_owner_davis" model="vet.owner">
+        <field name="name">Robert Davis</field>
+        <field name="email">robert.davis@example.com</field>
+        <field name="phone">555-0105</field>
+        <field name="street">654 Maple Drive</field>
+        <field name="city">Springfield</field>
+        <field name="zip">12346</field>
+    </record>
+</odoo>

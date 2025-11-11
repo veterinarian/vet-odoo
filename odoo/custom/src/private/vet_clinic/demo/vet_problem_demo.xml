@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- Demo Problems (Master Problem List) -->
+
+    <!-- Max - Hip Dysplasia (Active) -->
+    <record id="demo_problem_max_hip_dysplasia" model="vet.problem">
+        <field name="patient_id" ref="demo_patient_max" />
+        <field name="name">Hip Dysplasia</field>
+        <field name="status">active</field>
+        <field
+            name="onset_date"
+            eval="(DateTime.now() - timedelta(days=730)).strftime('%Y-%m-%d')"
+        />
+        <field
+            name="description"
+        >Bilateral hip dysplasia diagnosed via radiographs. Currently managed with NSAIDs and joint supplements.</field>
+    </record>
+
+    <!-- Max - Osteoarthritis (Active) -->
+    <record id="demo_problem_max_arthritis" model="vet.problem">
+        <field name="patient_id" ref="demo_patient_max" />
+        <field name="name">Osteoarthritis</field>
+        <field name="status">active</field>
+        <field
+            name="onset_date"
+            eval="(DateTime.now() - timedelta(days=365)).strftime('%Y-%m-%d')"
+        />
+        <field
+            name="description"
+        >Secondary to hip dysplasia. Managing with pain medication and weight control.</field>
+    </record>
+
+    <!-- Buddy - Ear Infection History (Resolved) -->
+    <record id="demo_problem_buddy_ear_infection" model="vet.problem">
+        <field name="patient_id" ref="demo_patient_buddy" />
+        <field name="name">Chronic Otitis Externa</field>
+        <field name="status">resolved</field>
+        <field
+            name="onset_date"
+            eval="(DateTime.now() - timedelta(days=180)).strftime('%Y-%m-%d')"
+        />
+        <field
+            name="resolved_date"
+            eval="(DateTime.now() - timedelta(days=30)).strftime('%Y-%m-%d')"
+        />
+        <field
+            name="description"
+        >Recurrent ear infections. Resolved with improved ear cleaning routine and preventive care.</field>
+    </record>
+
+    <!-- Charlie - Obesity (Active) -->
+    <record id="demo_problem_charlie_obesity" model="vet.problem">
+        <field name="patient_id" ref="demo_patient_charlie" />
+        <field name="name">Obesity</field>
+        <field name="status">active</field>
+        <field
+            name="onset_date"
+            eval="(DateTime.now() - timedelta(days=400)).strftime('%Y-%m-%d')"
+        />
+        <field
+            name="description"
+        >Body condition score 8/9. On weight management plan with prescription diet and increased exercise.</field>
+    </record>
+
+    <!-- Whiskers - Food Allergy (Active) -->
+    <record id="demo_problem_whiskers_food_allergy" model="vet.problem">
+        <field name="patient_id" ref="demo_patient_whiskers" />
+        <field name="name">Food Sensitivity (Chicken)</field>
+        <field name="status">active</field>
+        <field
+            name="onset_date"
+            eval="(DateTime.now() - timedelta(days=600)).strftime('%Y-%m-%d')"
+        />
+        <field
+            name="description"
+        >GI upset when fed chicken-based diets. Currently on limited ingredient fish-based diet.</field>
+    </record>
+
+    <!-- Luna - URI (Resolved) -->
+    <record id="demo_problem_luna_uri" model="vet.problem">
+        <field name="patient_id" ref="demo_patient_luna" />
+        <field name="name">Upper Respiratory Infection</field>
+        <field name="status">resolved</field>
+        <field
+            name="onset_date"
+            eval="(DateTime.now() - timedelta(days=90)).strftime('%Y-%m-%d')"
+        />
+        <field
+            name="resolved_date"
+            eval="(DateTime.now() - timedelta(days=75)).strftime('%Y-%m-%d')"
+        />
+        <field
+            name="description"
+        >Feline herpesvirus URI. Resolved with supportive care and lysine supplementation.</field>
+    </record>
+</odoo>

@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- Demo Medical Notes -->
+
+    <!-- Buddy - Recent SOAP Note -->
+    <record id="demo_note_buddy_limping" model="vet.medical.note">
+        <field name="patient_id" ref="demo_patient_buddy" />
+        <field name="author_id" ref="base.user_admin" />
+        <field name="note_type">soap</field>
+        <field
+            name="date"
+            eval="(DateTime.now() - timedelta(days=7)).strftime('%Y-%m-%d %H:%M:%S')"
+        />
+        <field
+            name="subjective"
+        >Owner reports Buddy has been limping on his front right leg for 2 days. No known trauma. Eating and drinking normally. Activity level decreased.</field>
+        <field
+            name="objective"
+        >Physical exam: T=101.5°F, HR=90bpm, RR=24bpm, CRT&lt;2sec
+Weight: 32.5 kg (BCS 5/9)
+Moderate swelling noted in right carpus. Pain on palpation. Full ROM limited by discomfort.
+All other systems WNL.</field>
+        <field name="assessment">Suspected carpus sprain, rule out fracture</field>
+        <field name="plan">1. Radiographs of right front leg (2 views)
+2. Carprofen 75mg PO BID x 7 days
+3. Strict rest - no running/jumping
+4. Ice pack to affected area 10-15min TID
+5. Recheck in 7 days or sooner if worsening
+6. Owner to monitor for lameness improvement</field>
+        <field name="is_important" eval="True" />
+    </record>
+
+    <!-- Buddy - Follow-up Communication -->
+    <record id="demo_note_buddy_followup" model="vet.medical.note">
+        <field name="patient_id" ref="demo_patient_buddy" />
+        <field name="author_id" ref="base.user_admin" />
+        <field name="note_type">communication</field>
+        <field
+            name="date"
+            eval="(DateTime.now() - timedelta(days=3)).strftime('%Y-%m-%d %H:%M:%S')"
+        />
+        <field
+            name="content"
+        ><![CDATA[
+            <p><strong>Phone call from owner - Follow-up on carpus sprain</strong></p>
+            <p>Owner reports significant improvement in lameness. Buddy is putting more weight on the leg and swelling has decreased. Still limiting activity as instructed.</p>
+            <p><strong>Recommendations:</strong></p>
+            <ul>
+                <li>Continue Carprofen as prescribed</li>
+                <li>Keep activity restricted for another 4 days</li>
+                <li>Proceed with recheck appointment as scheduled</li>
+            </ul>
+        ]]></field>
+    </record>
+
+    <!-- Max - SOAP for Hip Dysplasia Management -->
+    <record id="demo_note_max_hip_checkup" model="vet.medical.note">
+        <field name="patient_id" ref="demo_patient_max" />
+        <field name="author_id" ref="base.user_admin" />
+        <field name="note_type">soap</field>
+        <field
+            name="date"
+            eval="(DateTime.now() - timedelta(days=14)).strftime('%Y-%m-%d %H:%M:%S')"
+        />
+        <field
+            name="subjective"
+        >7-year-old MN German Shepherd presented for recheck of hip dysplasia. Owner reports Max is doing well on current pain management. Stiffness improved with daily Carprofen. Occasionally slow to rise in mornings but recovers quickly with movement.</field>
+        <field
+            name="objective"
+        >PE: T=101.2°F, HR=85bpm, RR=20bpm, Weight: 38.0kg (BCS 5/9 - ideal)
+Orthopedic: Mild bilateral hip crepitus. Pain score 2/10 on hip extension. Muscle mass good. Ambulatory with normal gait.</field>
+        <field
+            name="assessment"
+        >Hip dysplasia and secondary osteoarthritis - stable on current management</field>
+        <field name="plan">1. Continue Carprofen 100mg PO BID
+2. Continue Dasuquin joint supplement
+3. Maintain ideal body weight
+4. Low-impact exercise (swimming encouraged)
+5. Recheck in 3 months
+6. Consider adequan injections if deterioration noted</field>
+    </record>
+
+    <!-- Whiskers - Annual Vaccine Record -->
+    <record id="demo_note_whiskers_vaccine" model="vet.medical.note">
+        <field name="patient_id" ref="demo_patient_whiskers" />
+        <field name="author_id" ref="base.user_admin" />
+        <field name="note_type">communication</field>
+        <field
+            name="date"
+            eval="(DateTime.now() - timedelta(days=21)).strftime('%Y-%m-%d %H:%M:%S')"
+        />
+        <field
+            name="content"
+        ><![CDATA[
+            <h4>Annual Wellness Examination and Vaccinations</h4>
+            <p><strong>Physical Examination:</strong> All parameters WNL. Weight: 4.2kg (stable)</p>
+
+            <p><strong>Vaccinations Administered:</strong></p>
+            <ul>
+                <li>FVRCP booster - Lot# FV12345, Exp: 12/2025</li>
+                <li>Rabies vaccine (3-year) - Lot# RB67890, Exp: 11/2025</li>
+            </ul>
+
+            <p><strong>Declined:</strong> FeLV vaccine (indoor-only cat, owner declined)</p>
+
+            <p><strong>Next Vaccines Due:</strong> November 2027</p>
+
+            <p><strong>Recommendations Discussed:</strong></p>
+            <ul>
+                <li>Continue current diet (limited ingredient fish-based)</li>
+                <li>Annual dental cleaning recommended for next year</li>
+                <li>Fecal exam recommended - sample provided</li>
+            </ul>
+        ]]></field>
+    </record>
+
+    <!-- Whiskers - Lab Results -->
+    <record id="demo_note_whiskers_fecal" model="vet.medical.note">
+        <field name="patient_id" ref="demo_patient_whiskers" />
+        <field name="author_id" ref="base.user_admin" />
+        <field name="note_type">result</field>
+        <field
+            name="date"
+            eval="(DateTime.now() - timedelta(days=19)).strftime('%Y-%m-%d %H:%M:%S')"
+        />
+        <field
+            name="content"
+        ><![CDATA[
+            <h4>Fecal Flotation Results</h4>
+            <p><strong>Test Date:</strong> <span id="test_date">3 days ago</span></p>
+            <p><strong>Result:</strong> <span style="color: green; font-weight: bold;">NEGATIVE</span></p>
+            <p>No parasites, ova, or larvae detected.</p>
+            <p><strong>Interpretation:</strong> Normal result. No treatment needed.</p>
+        ]]></field>
+    </record>
+
+    <!-- Charlie - Weight Management SOAP -->
+    <record id="demo_note_charlie_weight" model="vet.medical.note">
+        <field name="patient_id" ref="demo_patient_charlie" />
+        <field name="author_id" ref="base.user_admin" />
+        <field name="note_type">soap</field>
+        <field
+            name="date"
+            eval="(DateTime.now() - timedelta(days=30)).strftime('%Y-%m-%d %H:%M:%S')"
+        />
+        <field
+            name="subjective"
+        >5-year-old MN Beagle for weight management recheck. Owner reports compliance with prescription diet (Hill's Metabolic). Charlie is more active and seems happier. No treats given except prescription low-cal treats.</field>
+        <field
+            name="objective"
+        >PE: T=101.0°F, HR=88bpm, Weight: 13.5kg (down from 15.2kg - 1.7kg lost in 8 weeks)
+BCS: 7/9 (improved from 8/9)
+Body fat: Ribs now palpable with slight pressure</field>
+        <field
+            name="assessment"
+        >Obesity - excellent progress on weight loss program. Target weight: 12.0kg</field>
+        <field name="plan">1. Continue Hill's Metabolic - current feeding amount
+2. Continue daily 20-minute walks
+3. Praise for excellent compliance!
+4. Recheck weight in 4 weeks
+5. Once at target, transition to maintenance plan</field>
+        <field name="is_important" eval="True" />
+    </record>
+
+    <!-- Luna - URI Treatment Note -->
+    <record id="demo_note_luna_uri" model="vet.medical.note">
+        <field name="patient_id" ref="demo_patient_luna" />
+        <field name="author_id" ref="base.user_admin" />
+        <field name="note_type">soap</field>
+        <field
+            name="date"
+            eval="(DateTime.now() - timedelta(days=90)).strftime('%Y-%m-%d %H:%M:%S')"
+        />
+        <field
+            name="subjective"
+        >1.5-year-old FS Maine Coon with 3-day history of sneezing, nasal discharge, and decreased appetite. Owner reports discharge started clear but now yellow-green. Indoor cat, no other cats in household.</field>
+        <field name="objective">PE: T=103.2°F (elevated), HR=180bpm, RR=32bpm
+Weight: 5.8kg (normal for age)
+EENT: Bilateral mucopurulent nasal discharge, mild conjunctivitis, no corneal ulcers noted with fluorescein stain
+Lungs: Clear
+Otherwise BAR</field>
+        <field
+            name="assessment"
+        >Upper respiratory infection, likely feline herpesvirus (FHV-1)</field>
+        <field
+            name="plan"
+        >1. Doxycycline 50mg PO BID x 14 days (for secondary bacterial infection)
+2. L-Lysine 500mg PO daily (immune support)
+3. Terramycin ophthalmic ointment OU BID x 7 days
+4. Encourage eating with warmed food
+5. Steam treatments 2-3x daily
+6. Recheck in 7 days or sooner if worsening
+7. Monitor for development of corneal ulcers</field>
+        <field name="is_important" eval="True" />
+    </record>
+
+    <!-- Luna - URI Resolution -->
+    <record id="demo_note_luna_uri_resolved" model="vet.medical.note">
+        <field name="patient_id" ref="demo_patient_luna" />
+        <field name="author_id" ref="base.user_admin" />
+        <field name="note_type">communication</field>
+        <field
+            name="date"
+            eval="(DateTime.now() - timedelta(days=75)).strftime('%Y-%m-%d %H:%M:%S')"
+        />
+        <field
+            name="content"
+        ><![CDATA[
+            <p><strong>Recheck Examination - URI Follow-up</strong></p>
+            <p>Luna doing much better! Temperature normal (101.3°F). No nasal discharge. Eyes clear. Eating well.</p>
+            <p><strong>Plan:</strong></p>
+            <ul>
+                <li>Discontinue all medications - completed full course</li>
+                <li>Continue L-Lysine for 1 more month as preventive</li>
+                <li>URI considered resolved</li>
+                <li>Owner educated on FHV-1 being lifelong (can recur with stress)</li>
+                <li>Recheck only if signs recur</li>
+            </ul>
+        ]]></field>
+    </record>
+
+    <!-- Oliver - Routine Exam -->
+    <record id="demo_note_oliver_wellness" model="vet.medical.note">
+        <field name="patient_id" ref="demo_patient_oliver" />
+        <field name="author_id" ref="base.user_admin" />
+        <field name="note_type">soap</field>
+        <field
+            name="date"
+            eval="(DateTime.now() - timedelta(days=60)).strftime('%Y-%m-%d %H:%M:%S')"
+        />
+        <field
+            name="subjective"
+        >4-year-old MN DSH for annual wellness exam. Indoor/outdoor cat. Owner reports no concerns. Eating, drinking, urinating, and defecating normally. Active and playful.</field>
+        <field
+            name="objective"
+        >PE: T=101.4°F, HR=160bpm, RR=28bpm, Weight: 6.5kg, BCS: 5/9 (ideal)
+EENT: Clear
+Oral: Grade 1 dental tartar
+CV: NSR, no murmur
+Respiratory: Clear
+Abdomen: Soft, non-painful
+Skin: No external parasites noted
+Nodes: WNL</field>
+        <field name="assessment">Healthy adult cat</field>
+        <field name="plan">1. FVRCP booster given - Lot# FV12346
+2. Rabies vaccine given (3-year) - Lot# RB67891
+3. FeLV/FIV test: Negative
+4. Fecal: Negative for parasites
+5. Recommend dental cleaning within next 6 months
+6. Continue current diet
+7. Consider keeping indoors to reduce injury/disease risk
+8. Next annual exam: 1 year</field>
+    </record>
+
+    <!-- Internal Note Example -->
+    <record id="demo_note_buddy_internal" model="vet.medical.note">
+        <field name="patient_id" ref="demo_patient_buddy" />
+        <field name="author_id" ref="base.user_admin" />
+        <field name="note_type">internal</field>
+        <field
+            name="date"
+            eval="(DateTime.now() - timedelta(days=5)).strftime('%Y-%m-%d %H:%M:%S')"
+        />
+        <field
+            name="content"
+        ><![CDATA[
+            <p><strong>Staff Note</strong></p>
+            <p>Radiographs reviewed - no fracture identified. Soft tissue swelling consistent with sprain/strain.</p>
+            <p>Owner called to discuss results. Relieved to hear no fracture. Will continue treatment as planned.</p>
+            <p>Recheck appointment scheduled for next week.</p>
+        ]]></field>
+        <field name="is_private" eval="True" />
+    </record>
+
+    <!-- Report Example -->
+    <record id="demo_note_max_xray_report" model="vet.medical.note">
+        <field name="patient_id" ref="demo_patient_max" />
+        <field name="author_id" ref="base.user_admin" />
+        <field name="note_type">report</field>
+        <field
+            name="date"
+            eval="(DateTime.now() - timedelta(days=400)).strftime('%Y-%m-%d %H:%M:%S')"
+        />
+        <field
+            name="content"
+        ><![CDATA[
+            <h4>Radiographic Report - Hip Dysplasia Evaluation</h4>
+            <p><strong>Study Date:</strong> 400 days ago</p>
+            <p><strong>Views:</strong> Ventrodorsal extended hip radiograph</p>
+
+            <p><strong>Findings:</strong></p>
+            <ul>
+                <li>Bilateral shallow acetabulum</li>
+                <li>Bilateral femoral head subluxation (moderate)</li>
+                <li>Left hip: Norberg angle 95° (abnormal - should be &gt;105°)</li>
+                <li>Right hip: Norberg angle 92° (abnormal)</li>
+                <li>Evidence of remodeling and secondary osteoarthritis</li>
+                <li>Osteophyte formation noted on both femoral necks</li>
+            </ul>
+
+            <p><strong>Impression:</strong> Bilateral hip dysplasia with secondary degenerative joint disease (moderate severity)</p>
+
+            <p><strong>Recommendations:</strong> Medical management with NSAIDs, joint supplements, weight control, and low-impact exercise. Surgical options (FHO, THR) discussed with owner - elected for conservative management at this time.</p>
+        ]]></field>
+        <field name="is_important" eval="True" />
+    </record>
+</odoo>

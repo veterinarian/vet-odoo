@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- Demo Patients -->
+    <record id="demo_patient_buddy" model="vet.patient">
+        <field name="name">Buddy</field>
+        <field name="owner_id" ref="demo_owner_smith" />
+        <field name="species_id" ref="species_dog" />
+        <field name="breed">Golden Retriever</field>
+        <field name="gender">male</field>
+        <field
+            name="birth_date"
+            eval="(DateTime.now() - timedelta(days=365*3 + 120)).strftime('%Y-%m-%d')"
+        />
+        <field name="color">Golden</field>
+        <field name="weight" eval="32.5" />
+        <field name="neutered" eval="True" />
+        <field name="microchip_number">982000123456789</field>
+        <field name="allergies">No known allergies</field>
+        <field
+            name="medical_notes"
+        >Friendly and cooperative during exams. Previous history of ear infections.</field>
+    </record>
+
+    <record id="demo_patient_whiskers" model="vet.patient">
+        <field name="name">Whiskers</field>
+        <field name="owner_id" ref="demo_owner_johnson" />
+        <field name="species_id" ref="species_cat" />
+        <field name="breed">Siamese</field>
+        <field name="gender">female</field>
+        <field
+            name="birth_date"
+            eval="(DateTime.now() - timedelta(days=365*2 + 45)).strftime('%Y-%m-%d')"
+        />
+        <field name="color">Seal Point</field>
+        <field name="weight" eval="4.2" />
+        <field name="neutered" eval="True" />
+        <field name="allergies">Sensitive to chicken-based foods</field>
+        <field name="medical_notes">Indoor cat. Can be anxious during visits.</field>
+    </record>
+
+    <record id="demo_patient_max" model="vet.patient">
+        <field name="name">Max</field>
+        <field name="owner_id" ref="demo_owner_williams" />
+        <field name="species_id" ref="species_dog" />
+        <field name="breed">German Shepherd</field>
+        <field name="gender">male</field>
+        <field
+            name="birth_date"
+            eval="(DateTime.now() - timedelta(days=365*7 + 200)).strftime('%Y-%m-%d')"
+        />
+        <field name="color">Black and Tan</field>
+        <field name="weight" eval="38.0" />
+        <field name="neutered" eval="True" />
+        <field name="microchip_number">982000987654321</field>
+        <field name="allergies">None</field>
+        <field
+            name="medical_notes"
+        >Senior dog. History of hip dysplasia. On pain management protocol.</field>
+    </record>
+
+    <record id="demo_patient_luna" model="vet.patient">
+        <field name="name">Luna</field>
+        <field name="owner_id" ref="demo_owner_brown" />
+        <field name="species_id" ref="species_cat" />
+        <field name="breed">Maine Coon</field>
+        <field name="gender">female</field>
+        <field
+            name="birth_date"
+            eval="(DateTime.now() - timedelta(days=365*1 + 180)).strftime('%Y-%m-%d')"
+        />
+        <field name="color">Silver Tabby</field>
+        <field name="weight" eval="5.8" />
+        <field name="neutered" eval="True" />
+        <field name="allergies">None</field>
+        <field name="medical_notes">Very social cat. Tolerates handling well.</field>
+    </record>
+
+    <record id="demo_patient_charlie" model="vet.patient">
+        <field name="name">Charlie</field>
+        <field name="owner_id" ref="demo_owner_davis" />
+        <field name="species_id" ref="species_dog" />
+        <field name="breed">Beagle</field>
+        <field name="gender">male</field>
+        <field
+            name="birth_date"
+            eval="(DateTime.now() - timedelta(days=365*5 + 30)).strftime('%Y-%m-%d')"
+        />
+        <field name="color">Tricolor</field>
+        <field name="weight" eval="13.5" />
+        <field name="neutered" eval="True" />
+        <field name="microchip_number">982000456789123</field>
+        <field name="allergies">Penicillin - causes GI upset</field>
+        <field
+            name="medical_notes"
+        >Prone to weight gain. On controlled diet. Loves treats during exams.</field>
+    </record>
+
+    <record id="demo_patient_oliver" model="vet.patient">
+        <field name="name">Oliver</field>
+        <field name="owner_id" ref="demo_owner_smith" />
+        <field name="species_id" ref="species_cat" />
+        <field name="breed">Domestic Shorthair</field>
+        <field name="gender">male</field>
+        <field
+            name="birth_date"
+            eval="(DateTime.now() - timedelta(days=365*4 + 90)).strftime('%Y-%m-%d')"
+        />
+        <field name="color">Orange Tabby</field>
+        <field name="weight" eval="6.5" />
+        <field name="neutered" eval="True" />
+        <field name="allergies">None</field>
+        <field
+            name="medical_notes"
+        >Outdoor cat. Up to date on all vaccinations. Very healthy overall.</field>
+    </record>
+</odoo>
